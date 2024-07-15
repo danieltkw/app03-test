@@ -1,0 +1,4 @@
+UPDATE `user_auth`
+SET `last_login` = '{{ new Date().toISOString() }}'
+WHERE `id` = '{{ this.params.id }}';
+

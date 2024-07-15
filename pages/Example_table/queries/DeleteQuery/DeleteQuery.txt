@@ -1,0 +1,2 @@
+DELETE FROM example_table
+  WHERE id = {{data_table.triggeredRow.id}};

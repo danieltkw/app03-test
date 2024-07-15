@@ -1,0 +1,4 @@
+UPDATE example_table SET
+		name = '{{update_form.fieldState.name.isVisible ? update_form.formData.name : update_form.sourceData.name}}',
+		description = '{{update_form.fieldState.description.isVisible ? update_form.formData.description : update_form.sourceData.description}}'
+WHERE id = {{data_table.selectedRow.id}};

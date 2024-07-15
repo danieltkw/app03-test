@@ -1,0 +1,4 @@
+INSERT INTO person (first_name, last_name, email, phone, vat)
+VALUES ('{{inp_addFirstName.text}}', '{{inp_addLastName.text}}', '{{inp_addEmail.text}}', '{{inp_addPhone.text}}', '{{inp_addVat.text.length === 9 && /^[0-9]+$/.test(inp_addVat.text) ? inp_addVat.text : ''}}')
+RETURNING *;
+

@@ -1,0 +1,12 @@
+SELECT
+  DATE_FORMAT(created, '%Y-%m') AS month,
+  SUM(total) AS total
+FROM
+  `order`
+WHERE
+  created >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH)
+GROUP BY
+  DATE_FORMAT(created, '%Y-%m')
+ORDER BY
+  month;
+

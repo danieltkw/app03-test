@@ -1,0 +1,5 @@
+INSERT INTO `user_auth` (`first_name`, `last_name`, `email`, `password_hash`, `role`)
+VALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', 'Admin');
+
+-- To fetch the inserted record, you will need to run another query
+SELECT * FROM `user_auth` WHERE `id` = LAST_INSERT_ID();

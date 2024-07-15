@@ -1,0 +1,15 @@
+{
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "Pedidos",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "actions": [],
+    "archivedActions": [],
+    "variables": [],
+    "userPermissions": []
+  },
+  "id": "Pedidos_utils",
+  "deleted": false,
+  "gitSyncId": "667427c00dbf37519a0ae2b4_f71d5b2e-18f9-4837-97a2-42177e2879ea"
+}
