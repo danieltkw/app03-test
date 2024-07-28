@@ -18,7 +18,7 @@
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "UPDATE `user_auth`\nSET `last_login` = '{{ new Date().toISOString() }}'\nWHERE `id` = '{{ this.params.id }}';\n\n",
+      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\nUPDATE `public_user_auth`\nSET `last_login` = '{{ new Date().toISOString() }}'\nWHERE `id` = '{{ this.params.id }}';\n# // ------------------------------------------------------------",
       "selfReferencingDataPaths": [],
       "pluginSpecifiedTemplates": [
         {

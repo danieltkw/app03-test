@@ -692,7 +692,7 @@
     "widgetId": "nkfoc62eb2",
     "allowAddNewRow": false,
     "enableServerSideFiltering": false,
-    "tableData": "{{utils.getOrders.data}}",
+    "tableData": "{{utils.getOrders()}}",
     "label": "Data",
     "searchKey": "",
     "parentId": "0",

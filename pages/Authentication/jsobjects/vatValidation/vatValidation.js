@@ -1,4 +1,8 @@
 export default {
+// vatValidation function
+// appsmith need that the function always start just with 'export default {' 
+// any coments shall be after the start
+
     isValidNIF: function (nif) {
         if (!nif || nif.length !== 9 || isNaN(nif)) {
             return false;
@@ -22,12 +26,12 @@ export default {
         return isValid;
     }
 };
-
 // ------------------------------------------------------------
 
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
 // ------------------------------------------------------------
+
 
 
 

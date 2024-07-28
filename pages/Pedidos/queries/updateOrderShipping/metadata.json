@@ -18,7 +18,7 @@
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "UPDATE `order`\nSET order_status_id = 3,\n    carrier = {{sel_carrier.selectedOptionValue}},\n    shipping = {{inp_shippingRate.text}},\n    shipping_date = {{dat_shippingDate.formattedDate}},\n    eta = {{dat_eta.formattedDate}},\n    weight_kg = {{inp_kg.text || 0}},\n    weight_lbs = {{inp_lbs.text || 0}},\n    width = {{inp_width.text || 0}},\n    height = {{inp_height.text || 0}},\n    length = {{inp_length.text || 0}},\n    tracking_no = {{inp_trackingId.text}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n",
+      "body": "-- Update order shipping details\nUPDATE `order`\nSET order_status_id = 3,\n    carrier = {{sel_carrier.selectedOptionValue}},\n    shipping = {{inp_shippingRate.text}},\n    shipping_date = {{dat_shippingDate.formattedDate}},\n    eta = {{dat_eta.formattedDate}},\n    weight_kg = {{inp_kg.text || 0}},\n    weight_lbs = {{inp_lbs.text || 0}},\n    width = {{inp_width.text || 0}},\n    height = {{inp_height.text || 0}},\n    length = {{inp_length.text || 0}},\n    tracking_no = {{inp_trackingId.text}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n",
       "selfReferencingDataPaths": [],
       "pluginSpecifiedTemplates": [
         {

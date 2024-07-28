@@ -15,7 +15,8 @@ FROM
   INNER JOIN product_variant v ON p.id = v.product_id 
   LEFT JOIN product_location pl ON v.id = pl.product_variant_id
 GROUP BY 
-  p.id, p.name, p.type, v.id, v.price, p.description, p.image, v.cost, v.sku, v.low_stock
+  p.id, p.name, p.type, p.description, p.image, v.id, v.price, v.cost, v.sku, v.low_stock
 ORDER BY 
   p.id, v.id
 LIMIT {{tbl_products.pageSize}} OFFSET {{(tbl_products.pageNo - 1) * tbl_products.pageSize}};
+

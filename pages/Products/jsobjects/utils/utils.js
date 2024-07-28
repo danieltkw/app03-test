@@ -16,15 +16,20 @@ export default {
     // Function to get products
     getProducts: async function () {
         console.clear();
+
+        // Fetch products using the configured query
         const products = await getProducts.run(); // Ensure `getProducts` query is correctly configured
 
+        // Get selected category filter
         const categoryFilter = sel_category.selectedOptionValue;
         let filteredProducts = products;
 
+        // Apply category filter if selected
         if (categoryFilter) {
             filteredProducts = products.filter(p => p.category === categoryFilter);
         }
 
+        // Map products to the required format
         return filteredProducts.map(p => {
             return {
                 ID: this.idConverter(p.id),
@@ -40,10 +45,12 @@ export default {
 
     // Function to get categories
     getCategories: async function () {
+        // Fetch products using the configured query
         const products = await getProducts.run(); // Ensure `getProducts` query is correctly configured
         const categories = products.map(p => p.category);
         const sanitisedCategories = categories.filter(category => category !== null && category.trim() !== "");
 
+        // Provide default categories if no products are available
         if (!products || products.length < 1) {
             return [
                 { id: 1, name: 'Food' },
@@ -51,11 +58,13 @@ export default {
             ];
         }
 
+        // Extract unique categories
         const uniqueCategoriesRaw = {};
         sanitisedCategories.forEach(category => {
             uniqueCategoriesRaw[category] = true;
         });
 
+        // Map unique categories to the required format
         const uniqueCategories = Object.keys(uniqueCategoriesRaw);
         return uniqueCategories.map((category, index) => {
             return { id: index, name: category };
@@ -63,11 +72,12 @@ export default {
     },
 };
 
-// ------------------------------------------------------------
+// // ------------------------------------------------------------
 
-// ------------------------------------------------------------
-// Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
-// ------------------------------------------------------------
+// // ------------------------------------------------------------
+// // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
+// // ------------------------------------------------------------
+
 
 
 

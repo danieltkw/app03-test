@@ -1,3 +1,4 @@
+-- Get orders
 SELECT `order`.*, 
        location.address1, 
        person.first_name, 

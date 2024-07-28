@@ -1,3 +1,8 @@
-SELECT * FROM `user_auth` WHERE `email` = '{{inp_email.text}}';
+# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
+# // ------------------------------------------------------------
+# // SQL query to select all fields from the public_asset_user table where the email matches the input email
+SELECT * FROM `public_user_auth`.`email`;
+# // ------------------------------------------------------------
+
 
 

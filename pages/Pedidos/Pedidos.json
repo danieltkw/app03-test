@@ -28,15 +28,26 @@
         "layoutOnLoadActions": [
           [
             {
-              "id": "Pedidos_aagetOrders",
-              "name": "aagetOrders",
+              "id": "Pedidos_utils.getOrderProducts",
+              "name": "utils.getOrderProducts",
+              "collectionId": "Pedidos_utils",
               "confirmBeforeExecute": false,
-              "pluginType": "DB",
+              "pluginType": "JS",
               "jsonPathKeys": [
-                "(tbl_orders.pageNo - 1) * tbl_orders.pageSize",
-                "tbl_orders.pageSize"
+                "async () => {\n  const orderProducts = await getOrderProducts.run();\n  return orderProducts.map(p => {\n    return {\n      Id: p.id,\n      Name: p.name,\n      SKU: p.sku,\n      Price: p.price,\n      Quantity: p.quantity,\n      Tax: p.taxes,\n      Subtotal: parseInt(p.price) * parseInt(p.quantity),\n      Image: p.image\n    };\n  });\n}"
               ],
-              "timeoutInMillisecond": 20000
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "Pedidos_utils.getOrderTrack",
+              "name": "utils.getOrderTrack",
+              "collectionId": "Pedidos_utils",
+              "confirmBeforeExecute": false,
+              "pluginType": "JS",
+              "jsonPathKeys": [
+                "async () => {\n  const orderTrack = await getOrderTrack.run();\n  return orderTrack.map((o, index) => {\n    return {\n      id: index,\n      Status: o.label,\n      Date: new Date(o.created).toDateString(),\n      Time: new Date(o.created).toLocaleTimeString().slice(0, 5)\n    };\n  });\n}"
+              ],
+              "timeoutInMillisecond": 10000
             }
           ]
         ],

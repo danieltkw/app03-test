@@ -18,7 +18,7 @@
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "SELECT returns.*, order_line.product_variant_id, order_line.quantity, product_variant.product_id AS main_product, product_variant.price AS price, product.name, product.type AS category, location.label AS warehouse\nFROM returns\nINNER JOIN order_line ON returns.product_id = order_line.id\nINNER JOIN product_variant ON order_line.product_variant_id = product_variant.id\nINNER JOIN product ON product_variant.product_id = product.id\nLEFT JOIN location ON returns.warehouse_id = location.id\nORDER BY id ASC\nLIMIT {{tbl_returns.pageSize}} OFFSET {{(tbl_returns.pageNo - 1) * tbl_returns.pageSize}};\n",
+      "body": "SELECT `returns`.*, \n       `order_line`.`product_variant_id`, \n       `order_line`.`quantity`, \n       `product_variant`.`product_id` AS `main_product`, \n       `product_variant`.`price` AS `price`, \n       `product`.`name`, \n       `product`.`type` AS `category`, \n       `location`.`label` AS `warehouse`\nFROM `returns`\nINNER JOIN `order_line` ON `returns`.`product_id` = `order_line`.`product_id`\nINNER JOIN `product_variant` ON `order_line`.`product_variant_id` = `product_variant`.`id`\nINNER JOIN `product` ON `product_variant`.`product_id` = `product`.`id`\nLEFT JOIN `location` ON `returns`.`warehouse_id` = `location`.`id`\nORDER BY `id` ASC\nLIMIT {{tbl_returns.pageSize}} OFFSET {{(tbl_returns.pageNo - 1) * tbl_returns.pageSize}};\n",
       "selfReferencingDataPaths": [],
       "pluginSpecifiedTemplates": [
         {

@@ -18,7 +18,7 @@
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "UPDATE `order`\nSET order_status_id = {{this.params.statusId}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n",
+      "body": "-- Update order status\nUPDATE `order`\nSET order_status_id = {{this.params.statusId}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n",
       "selfReferencingDataPaths": [],
       "pluginSpecifiedTemplates": [
         {

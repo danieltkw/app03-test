@@ -6,7 +6,12 @@
     "pluginType": "JS",
     "actions": [],
     "archivedActions": [],
-    "variables": [],
+    "variables": [
+      {
+        "name": "isTestMode",
+        "value": "true"
+      }
+    ],
     "userPermissions": []
   },
   "id": "Pedidos_utils",

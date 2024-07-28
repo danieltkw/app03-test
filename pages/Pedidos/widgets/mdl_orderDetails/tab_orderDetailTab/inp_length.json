@@ -9,8 +9,8 @@
         "number",
         "textarea"
     ],
-    "topRow": 47,
-    "bottomRow": 54,
+    "topRow": 50,
+    "bottomRow": 57,
     "parentRowSpace": 10,
     "labelWidth": 5,
     "autoFocus": false,
@@ -48,10 +48,10 @@
     "renderMode": "CANVAS",
     "isLoading": false,
     "responsiveBehavior": "fill",
-    "originalTopRow": 33,
+    "originalTopRow": 47,
     "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
     "maxDynamicHeight": 9000,
-    "originalBottomRow": 38,
+    "originalBottomRow": 54,
     "iconAlign": "left",
     "defaultText": "{{appsmith.store.order.Length || ''}}",
     "minDynamicHeight": 4

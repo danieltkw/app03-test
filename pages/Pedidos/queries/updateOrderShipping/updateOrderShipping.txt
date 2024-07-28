@@ -1,3 +1,4 @@
+-- Update order shipping details
 UPDATE `order`
 SET order_status_id = 3,
     carrier = {{sel_carrier.selectedOptionValue}},

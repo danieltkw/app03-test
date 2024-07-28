@@ -18,7 +18,7 @@
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "INSERT INTO `user_auth` (`first_name`, `last_name`, `email`, `password_hash`, `role`)\nVALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', 'Admin');\n\n-- To fetch the inserted record, you will need to run another query\nSELECT * FROM `user_auth` WHERE `id` = LAST_INSERT_ID();\n",
+      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\n\nINSERT INTO `public_user_auth` (`first_name`, `last_name`, `email`, `username`, `password_hash`, `last_login`, `role`, `created`, `updated`)\nVALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', NOW(), 'Admin', NOW(), NOW())\nRETURNING *;\n# // ------------------------------------------------------------\n",
       "selfReferencingDataPaths": [],
       "pluginSpecifiedTemplates": [
         {

@@ -53,6 +53,6 @@
     "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
     "maxDynamicHeight": 9000,
     "iconAlign": "left",
-    "defaultText": "{{tbl_returns.selectedRow.Reason}}",
+    "defaultText": "{{String(tbl_returns.selectedRow.reason)}}\n",
     "minDynamicHeight": 4
 }

@@ -1,5 +1,7 @@
-INSERT INTO `user_auth` (`first_name`, `last_name`, `email`, `password_hash`, `role`)
-VALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', 'Admin');
+# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
+# // ------------------------------------------------------------
 
--- To fetch the inserted record, you will need to run another query
-SELECT * FROM `user_auth` WHERE `id` = LAST_INSERT_ID();
+INSERT INTO `public_user_auth` (`first_name`, `last_name`, `email`, `username`, `password_hash`, `last_login`, `role`, `created`, `updated`)
+VALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', NOW(), 'Admin', NOW(), NOW())
+RETURNING *;
+# // ------------------------------------------------------------
