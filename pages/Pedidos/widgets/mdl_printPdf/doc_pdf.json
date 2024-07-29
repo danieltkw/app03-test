@@ -1,27 +1,33 @@
 {
-    "widgetName": "doc_pdf",
-    "isCanvas": false,
-    "displayName": "Document Viewer",
-    "iconSVG": "/static/media/icon.09fcd36be84f09ed7312b2ed6a307b27.svg",
-    "searchTags": ["pdf"],
-    "topRow": 5,
-    "bottomRow": 103,
-    "parentRowSpace": 10,
-    "type": "DOCUMENT_VIEWER_WIDGET",
-    "hideCard": false,
-    "animateLoading": true,
-    "parentColumnSpace": 6.9375,
-    "dynamicTriggerPathList": [],
-    "leftColumn": 1,
-    "dynamicBindingPathList": [{"key": "docUrl"}],
-    "key": "o965n3is2x",
-    "isDeprecated": false,
-    "rightColumn": 63,
-    "widgetId": "pbsyetpo7b",
-    "isVisible": true,
-    "version": 1,
-    "parentId": "b9q397ggje",
-    "renderMode": "CANVAS",
-    "isLoading": false,
-    "docUrl": "{{appsmith.store.labelPDF }}"
+  "animateLoading": true,
+  "bottomRow": 103,
+  "displayName": "Document Viewer",
+  "docUrl": "{{appsmith.store.labelPDF }}",
+  "dynamicBindingPathList": [
+    {
+      "key": "docUrl"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.09fcd36be84f09ed7312b2ed6a307b27.svg",
+  "isCanvas": false,
+  "isDeprecated": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "o965n3is2x",
+  "leftColumn": 1,
+  "parentColumnSpace": 6.9375,
+  "parentId": "b9q397ggje",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "rightColumn": 63,
+  "searchTags": [
+    "pdf"
+  ],
+  "topRow": 5,
+  "type": "DOCUMENT_VIEWER_WIDGET",
+  "version": 1,
+  "widgetId": "pbsyetpo7b",
+  "widgetName": "doc_pdf"
 }

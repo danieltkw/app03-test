@@ -1,11 +1,11 @@
 {
+  "gitSyncId": "667427c00dbf37519a0ae2b4_00f7c645-b2c3-4f2f-b6af-567b35942a1c",
+  "id": "Dashboard3_utils",
   "unpublishedCollection": {
     "name": "utils",
     "pageId": "Dashboard3",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "actions": [],
-    "archivedActions": [],
     "variables": [
       {
         "name": "defaultTab",
@@ -15,10 +15,6 @@
         "name": "testMode",
         "value": "true"
       }
-    ],
-    "userPermissions": []
-  },
-  "id": "Dashboard3_utils",
-  "deleted": false,
-  "gitSyncId": "667427c00dbf37519a0ae2b4_00f7c645-b2c3-4f2f-b6af-567b35942a1c"
+    ]
+  }
 }

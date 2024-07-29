@@ -1,11 +1,11 @@
 {
+  "gitSyncId": "667427c00dbf37519a0ae2b4_a405d86c-5316-41c8-9247-c8fac831437c",
+  "id": "Authentication_functions",
   "unpublishedCollection": {
     "name": "functions",
     "pageId": "Authentication",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "actions": [],
-    "archivedActions": [],
     "variables": [
       {
         "name": "defaultTab",
@@ -15,10 +15,6 @@
         "name": "testMode",
         "value": "true"
       }
-    ],
-    "userPermissions": []
-  },
-  "id": "Authentication_functions",
-  "deleted": false,
-  "gitSyncId": "667427c00dbf37519a0ae2b4_a405d86c-5316-41c8-9247-c8fac831437c"
+    ]
+  }
 }

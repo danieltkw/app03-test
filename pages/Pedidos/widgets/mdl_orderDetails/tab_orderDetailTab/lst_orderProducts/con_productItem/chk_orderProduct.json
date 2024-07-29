@@ -1,47 +1,63 @@
 {
-    "widgetName": "chk_orderProduct",
-    "dynamicPropertyPathList": [
-        {"key": "onCheckChange"},
-        {"key": "defaultCheckedState"}
-    ],
-    "displayName": "Checkbox",
-    "iconSVG": "/static/media/icon.aaab032b43383e4fa53ffc0ef40c90ef.svg",
-    "searchTags": ["boolean"],
-    "topRow": 3,
-    "bottomRow": 7,
-    "parentRowSpace": 10,
-    "type": "CHECKBOX_WIDGET",
-    "alignWidget": "LEFT",
-    "hideCard": false,
-    "animateLoading": true,
-    "parentColumnSpace": 14.7257080078125,
-    "dynamicTriggerPathList": [{"key": "onCheckChange"}],
-    "leftColumn": 0,
-    "dynamicBindingPathList": [
-        {"key": "accentColor"},
-        {"key": "borderRadius"},
-        {"key": "defaultCheckedState"}
-    ],
-    "labelPosition": "Left",
-    "onCheckChange": "{{\nutils.handleCheckProduct(currentItem)\n}}",
-    "isDisabled": false,
-    "key": "64w3vepad2",
-    "isRequired": false,
-    "isDeprecated": false,
-    "rightColumn": 2,
-    "dynamicHeight": "FIXED",
-    "widgetId": "nliar8zb93",
-    "accentColor": "{{appsmith.theme.colors.primaryColor}}",
-    "minWidth": 450,
-    "isVisible": true,
-    "label": "",
-    "version": 1,
-    "parentId": "6dvb5jpmdu",
-    "renderMode": "CANVAS",
-    "isLoading": false,
-    "responsiveBehavior": "fill",
-    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-    "defaultCheckedState": "{{utils.isChecked(currentItem)}}",
-    "maxDynamicHeight": 9000,
-    "minDynamicHeight": 4
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "alignWidget": "LEFT",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 7,
+  "defaultCheckedState": "{{utils.isChecked(currentItem)}}",
+  "displayName": "Checkbox",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "defaultCheckedState"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "onCheckChange"
+    },
+    {
+      "key": "defaultCheckedState"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onCheckChange"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.aaab032b43383e4fa53ffc0ef40c90ef.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "64w3vepad2",
+  "label": "",
+  "labelPosition": "Left",
+  "leftColumn": 0,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "onCheckChange": "{{\nutils.handleCheckProduct(currentItem)\n}}",
+  "parentColumnSpace": 14.7257080078125,
+  "parentId": "6dvb5jpmdu",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 2,
+  "searchTags": [
+    "boolean"
+  ],
+  "topRow": 3,
+  "type": "CHECKBOX_WIDGET",
+  "version": 1,
+  "widgetId": "nliar8zb93",
+  "widgetName": "chk_orderProduct"
 }

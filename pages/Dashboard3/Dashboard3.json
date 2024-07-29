@@ -1,90 +1,33 @@
 {
+  "gitSyncId": "667427c00dbf37519a0ae2b4_cbc447b7-ed98-4372-98cd-a4f6c0fcf5b0",
   "unpublishedPage": {
-    "name": "Dashboard3",
-    "slug": "dashboard3",
+    "isHidden": false,
     "layouts": [
       {
-        "viewMode": false,
         "dsl": {
-          "widgetName": "MainContainer",
           "backgroundColor": "none",
+          "bottomRow": 1292,
+          "canExtend": true,
+          "containerStyle": "none",
+          "detachFromLayout": true,
+          "dynamicBindingPathList": [],
+          "dynamicTriggerPathList": [],
+          "leftColumn": 0,
+          "minHeight": 1292,
+          "parentColumnSpace": 1,
+          "parentRowSpace": 1,
           "rightColumn": 4896,
           "snapColumns": 64,
-          "detachFromLayout": true,
-          "widgetId": "0",
-          "topRow": 0,
-          "bottomRow": 1292,
-          "containerStyle": "none",
           "snapRows": 124,
-          "parentRowSpace": 1,
+          "topRow": 0,
           "type": "CANVAS_WIDGET",
-          "canExtend": true,
           "version": 89,
-          "minHeight": 1292,
-          "dynamicTriggerPathList": [],
-          "parentColumnSpace": 1,
-          "dynamicBindingPathList": [],
-          "leftColumn": 0
-        },
-        "layoutOnLoadActions": [
-          [
-            {
-              "id": "Dashboard3_aagetOrders",
-              "name": "aagetOrders",
-              "confirmBeforeExecute": false,
-              "pluginType": "DB",
-              "jsonPathKeys": [],
-              "timeoutInMillisecond": 20000
-            },
-            {
-              "id": "Dashboard3_utils.dashboardMetrics",
-              "name": "utils.dashboardMetrics",
-              "collectionId": "Dashboard3_utils",
-              "confirmBeforeExecute": false,
-              "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  const orders = await getOrders.run();\n  const returnsCount = await getReturnsCount.run();\n  const allOrders = orders.length;\n  const fulfilledOrders = orders.filter(o => o.status === 'DELIVERED').length;\n  const unfulfilledOrders = orders.filter(o => o.status === 'UNFULFILLED').length;\n  const cancelledOrders = orders.filter(o => o.status === 'CANCELLED').length;\n  const shippedOrders = orders.filter(o => o.status === 'SHIPPED').length;\n  const packedOrders = orders.filter(o => o.status === 'PACKED').length;\n  const totalOrderValue = orders.reduce((a, b) => a + b.total, 0);\n  const formattedOrderValueAmount = totalOrderValue.toLocaleString('en-US', {\n    style: 'currency',\n    currency: 'USD'\n  }).slice(0, -3);\n  return {\n    allOrders,\n    fulfilledOrders,\n    unfulfilledOrders,\n    cancelledOrders,\n    shippedOrders,\n    packedOrders,\n    returnsCount: returnsCount[0].count,\n    totalOrderValue: formattedOrderValueAmount\n  };\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            }
-          ],
-          [
-            {
-              "id": "Dashboard3_utils.revenueChart",
-              "name": "utils.revenueChart",
-              "collectionId": "Dashboard3_utils",
-              "confirmBeforeExecute": false,
-              "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  const revenueByMonth = await getRevenueByMonth.run();\n  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];\n  return revenueByMonth.map(r => {\n    return {\n      x: months[parseInt(r.month.substring(5)) - 1] + ' ' + r.month.substring(2, 4),\n      y: r.total\n    };\n  });\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            },
-            {
-              "id": "Dashboard3_utils.topOrderedProductsChart",
-              "name": "utils.topOrderedProductsChart",
-              "collectionId": "Dashboard3_utils",
-              "confirmBeforeExecute": false,
-              "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  const orderedProductsCount = await getOrderProductCount.run();\n  return orderedProductsCount.map(p => {\n    return {\n      x: p.name,\n      y: p.variant_count\n    };\n  });\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            }
-          ]
-        ],
-        "layoutOnLoadActionErrors": [],
-        "validOnPageLoadActions": true,
-        "id": "Dashboard3",
-        "deleted": false,
-        "policies": [],
-        "userPermissions": []
+          "widgetId": "0",
+          "widgetName": "MainContainer"
+        }
       }
     ],
-    "userPermissions": [],
-    "policies": [],
-    "isHidden": false
-  },
-  "deleted": false,
-  "gitSyncId": "667427c00dbf37519a0ae2b4_cbc447b7-ed98-4372-98cd-a4f6c0fcf5b0"
+    "name": "Dashboard3",
+    "slug": "dashboard3"
+  }
 }

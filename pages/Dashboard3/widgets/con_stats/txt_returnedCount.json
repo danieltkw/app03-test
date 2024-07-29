@@ -1,44 +1,52 @@
 {
-    "widgetName": "txt_returnedCount",
-    "displayName": "Text",
-    "iconSVG": "/static/media/icon.97c59b52.svg",
-    "searchTags": [
-        "typography",
-        "paragraph"
-    ],
-    "topRow": 3,
-    "bottomRow": 7,
-    "type": "TEXT_WIDGET",
-    "hideCard": false,
-    "animateLoading": true,
-    "overflow": "NONE",
-    "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
-    "dynamicTriggerPathList": [],
-    "leftColumn": 50,
-    "dynamicBindingPathList": [
-        {"key": "fontFamily"},
-        {"key": "borderRadius"},
-        {"key": "textColor"},
-        {"key": "text"}
-    ],
-    "shouldTruncate": false,
-    "truncateButtonColor": "#FFC13D",
-    "text": "{{utils.dashboardMetrics.data.returnsCount}}",
-    "key": "xx7obgmjct",
-    "isDeprecated": false,
-    "rightColumn": 60,
-    "textAlign": "LEFT",
-    "dynamicHeight": "FIXED",
-    "widgetId": "y1e8vihsiz",
-    "isVisible": true,
-    "fontStyle": "BOLD",
-    "textColor": "{{appsmith.theme.colors.primaryColor}}",
-    "version": 1,
-    "parentId": "m4pgcrl5lv",
-    "renderMode": "CANVAS",
-    "isLoading": false,
-    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-    "maxDynamicHeight": 9000,
-    "fontSize": "1.875rem",
-    "minDynamicHeight": 4
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 7,
+  "displayName": "Text",
+  "dynamicBindingPathList": [
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "textColor"
+    },
+    {
+      "key": "text"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1.875rem",
+  "fontStyle": "BOLD",
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.97c59b52.svg",
+  "isDeprecated": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "xx7obgmjct",
+  "leftColumn": 50,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "overflow": "NONE",
+  "parentId": "m4pgcrl5lv",
+  "renderMode": "CANVAS",
+  "rightColumn": 60,
+  "searchTags": [
+    "typography",
+    "paragraph"
+  ],
+  "shouldTruncate": false,
+  "text": "{{utils.dashboardMetrics.data.returnsCount}}",
+  "textAlign": "LEFT",
+  "textColor": "{{appsmith.theme.colors.primaryColor}}",
+  "topRow": 3,
+  "truncateButtonColor": "#FFC13D",
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "y1e8vihsiz",
+  "widgetName": "txt_returnedCount"
 }

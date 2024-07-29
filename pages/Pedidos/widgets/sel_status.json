@@ -1,53 +1,67 @@
 {
-    "boxShadow": "none",
-    "widgetName": "sel_status",
-    "isFilterable": false,
-    "dynamicPropertyPathList": [{"key": "sourceData"}],
-    "iconSVG": "/static/media/icon.bd99caba5853ad71e4b3d8daffacb3a2.svg",
-    "displayName": "Select",
-    "labelText": "Status",
-    "topRow": 0,
-    "searchTags": ["dropdown"],
-    "bottomRow": 4,
-    "parentRowSpace": 10,
-    "labelWidth": 5,
-    "type": "SELECT_WIDGET",
-    "serverSideFiltering": false,
-    "hideCard": false,
-    "defaultOptionValue": "",
-    "animateLoading": true,
-    "parentColumnSpace": 13.9814453125,
-    "dynamicTriggerPathList": [{"key": "onOptionChange"}],
-    "leftColumn": 18,
-    "dynamicBindingPathList": [
-        {"key": "accentColor"},
-        {"key": "borderRadius"}
-    ],
-    "labelPosition": "Top",
-    "labelStyle": "BOLD",
-    "placeholderText": "Selecione alternativa",
-    "isDisabled": false,
-    "sourceData": "[\n  {\n    \"label\": \"Incompleta\",\n    \"value\": \"UNFULFILLED\"\n  },\n\t{\n    \"label\": \"Cancelada\",\n    \"value\": \"CANCELLED\"\n  },\n  {\n    \"label\": \"Armazenada\",\n    \"value\": \"PACKED\"\n  },\n  {\n    \"label\": \"Enviada\",\n    \"value\": \"SHIPPED\"\n  },\n\t{\n    \"label\": \"Entregue\",\n    \"value\": \"DELIVERED\"\n  }\n]",
-    "key": "emek2xtv55",
-    "labelTextSize": "0.875rem",
-    "isRequired": false,
-    "isDeprecated": false,
-    "rightColumn": 50,
-    "dynamicHeight": "FIXED",
-    "accentColor": "{{appsmith.theme.colors.primaryColor}}",
-    "widgetId": "qnltwn98vn",
-    "optionValue": "value",
-    "isVisible": true,
-    "version": 1,
-    "parentId": "0",
-    "isLoading": false,
-    "labelAlignment": "left",
-    "renderMode": "CANVAS",
-    "optionLabel": "label",
-    "originalTopRow": 11,
-    "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-    "maxDynamicHeight": 9000,
-    "originalBottomRow": 15,
-    "onOptionChange": "{{utils.getOrders()}}",
-    "minDynamicHeight": 4
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 4,
+  "boxShadow": "none",
+  "defaultOptionValue": "",
+  "displayName": "Select",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onOptionChange"
+    }
+  ],
+  "hideCard": false,
+  "iconSVG": "/static/media/icon.bd99caba5853ad71e4b3d8daffacb3a2.svg",
+  "isDeprecated": false,
+  "isDisabled": false,
+  "isFilterable": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "emek2xtv55",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "BOLD",
+  "labelText": "Status",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 18,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "onOptionChange": "{{utils.getOrders()}}",
+  "optionLabel": "label",
+  "optionValue": "value",
+  "originalBottomRow": 15,
+  "originalTopRow": 11,
+  "parentColumnSpace": 13.9814453125,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placeholderText": "Selecione alternativa",
+  "renderMode": "CANVAS",
+  "rightColumn": 50,
+  "searchTags": [
+    "dropdown"
+  ],
+  "serverSideFiltering": false,
+  "sourceData": "[\n  {\n    \"label\": \"Incompleta\",\n    \"value\": \"UNFULFILLED\"\n  },\n\t{\n    \"label\": \"Cancelada\",\n    \"value\": \"CANCELLED\"\n  },\n  {\n    \"label\": \"Armazenada\",\n    \"value\": \"PACKED\"\n  },\n  {\n    \"label\": \"Enviada\",\n    \"value\": \"SHIPPED\"\n  },\n\t{\n    \"label\": \"Entregue\",\n    \"value\": \"DELIVERED\"\n  }\n]",
+  "topRow": 0,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "qnltwn98vn",
+  "widgetName": "sel_status"
 }

@@ -1,68 +1,32 @@
 {
+  "gitSyncId": "667427c00dbf37519a0ae2b4_e2ec600f-d08a-4d57-a3f3-a608f7f65057",
   "unpublishedPage": {
-    "name": "Pedidos",
-    "slug": "pedidos",
+    "isHidden": false,
     "layouts": [
       {
-        "viewMode": false,
         "dsl": {
-          "widgetName": "MainContainer",
           "backgroundColor": "none",
-          "rightColumn": 1224,
-          "snapColumns": 64,
-          "detachFromLayout": true,
-          "widgetId": "0",
-          "topRow": 0,
           "bottomRow": 950,
-          "containerStyle": "none",
-          "snapRows": 64,
-          "parentRowSpace": 1,
-          "type": "CANVAS_WIDGET",
           "canExtend": true,
-          "version": 89,
+          "containerStyle": "none",
+          "detachFromLayout": true,
+          "dynamicBindingPathList": [],
+          "leftColumn": 0,
           "minHeight": 660,
           "parentColumnSpace": 1,
-          "dynamicBindingPathList": [],
-          "leftColumn": 0
-        },
-        "layoutOnLoadActions": [
-          [
-            {
-              "id": "Pedidos_utils.getOrderProducts",
-              "name": "utils.getOrderProducts",
-              "collectionId": "Pedidos_utils",
-              "confirmBeforeExecute": false,
-              "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  const orderProducts = await getOrderProducts.run();\n  return orderProducts.map(p => {\n    return {\n      Id: p.id,\n      Name: p.name,\n      SKU: p.sku,\n      Price: p.price,\n      Quantity: p.quantity,\n      Tax: p.taxes,\n      Subtotal: parseInt(p.price) * parseInt(p.quantity),\n      Image: p.image\n    };\n  });\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            },
-            {
-              "id": "Pedidos_utils.getOrderTrack",
-              "name": "utils.getOrderTrack",
-              "collectionId": "Pedidos_utils",
-              "confirmBeforeExecute": false,
-              "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  const orderTrack = await getOrderTrack.run();\n  return orderTrack.map((o, index) => {\n    return {\n      id: index,\n      Status: o.label,\n      Date: new Date(o.created).toDateString(),\n      Time: new Date(o.created).toLocaleTimeString().slice(0, 5)\n    };\n  });\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            }
-          ]
-        ],
-        "layoutOnLoadActionErrors": [],
-        "validOnPageLoadActions": true,
-        "id": "Pedidos",
-        "deleted": false,
-        "policies": [],
-        "userPermissions": []
+          "parentRowSpace": 1,
+          "rightColumn": 1224,
+          "snapColumns": 64,
+          "snapRows": 64,
+          "topRow": 0,
+          "type": "CANVAS_WIDGET",
+          "version": 89,
+          "widgetId": "0",
+          "widgetName": "MainContainer"
+        }
       }
     ],
-    "userPermissions": [],
-    "policies": [],
-    "isHidden": false
-  },
-  "deleted": false,
-  "gitSyncId": "667427c00dbf37519a0ae2b4_e2ec600f-d08a-4d57-a3f3-a608f7f65057"
+    "name": "Pedidos",
+    "slug": "pedidos"
+  }
 }
