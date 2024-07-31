@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- Get order products\nSELECT order_line.*, \n       product_variant.sku, \n       product_variant.price, \n       product.image, \n       `order`.total, \n       `order`.taxes, \n       `order`.subtotal, \n       product.name\nFROM order_line \nINNER JOIN product_variant ON order_line.product_variant_id = product_variant.id\nINNER JOIN `order` ON order_line.order_id = `order`.id\nINNER JOIN product ON product_variant.product_id = product.id\nWHERE order_id = {{appsmith.store.order.Order_id}};\n\n-- Get order tracking details\nSELECT order_track.*, \n       order_status.label \nFROM order_track \nINNER JOIN order_status ON order_track.order_status_id = order_status.id\nWHERE order_id = {{appsmith.store.order.Order_id || 1}};\n",
+      "body": "-- Get order products\nSELECT order_line.*, \n       product_variant.sku, \n       product_variant.price, \n       product.image, \n       `order`.total, \n       `order`.taxes, \n       `order`.subtotal, \n       product.name\nFROM order_line \nINNER JOIN product_variant ON order_line.product_variant_id = product_variant.id\nINNER JOIN `order` ON order_line.order_id = `order`.id\nINNER JOIN product ON product_variant.product_id = product.id\nWHERE order_line.order_id = {{appsmith.store.order.Order_id}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

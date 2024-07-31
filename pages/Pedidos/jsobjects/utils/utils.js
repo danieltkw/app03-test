@@ -183,12 +183,12 @@ export default {
             }
 
             return filteredOrders.map(o => ({
-                ID: this.idConverter('OR', o.id),
+                ID: this.idConverter(o.id),
                 Order_id: o.id,
                 Order_date: o.created,
                 Customer: `${o.first_name} ${o.last_name}`,
                 Total: o.total.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-                DeliveryFee: o.shipping.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
+                DeliveryFee: o.shipping.toLocaleString('en-US', { style: 'currency', 'currency': 'USD' }),
                 ShippingAddress: o.address1,
                 Status: o.status,
                 Phone: o.phone,
@@ -216,7 +216,12 @@ export default {
             return;
         }
 
+        // Log the selected order for debugging
+        console.log('Selected Order:', selectedOrder);
         storeValue('order', selectedOrder);
+
+        // Log the stored order for debugging
+        console.log('Stored Order:', appsmith.store.order);
 
         // Fetch order products and order track details
         await this.getOrderProducts();
@@ -654,3 +659,4 @@ Phone: 988-989-9877`,
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
 // ------------------------------------------------------------
+
