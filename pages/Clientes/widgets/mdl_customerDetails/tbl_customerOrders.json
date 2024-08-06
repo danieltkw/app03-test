@@ -256,7 +256,7 @@
   "rightColumn": 63,
   "searchKey": "",
   "showInlineEditingOptionDropdown": true,
-  "tableData": "{{utils.getCustomerOrders()}}\n",
+  "tableData": "{{getCustomerOrders.data}}\n",
   "textSize": "0.875rem",
   "topRow": 41,
   "totalRecordsCount": 0,

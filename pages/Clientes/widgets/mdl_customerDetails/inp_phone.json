@@ -8,7 +8,7 @@
   "bottomRow": 33,
   "boxShadow": "none",
   "defaultDialCode": "+351",
-  "defaultText": "{{tbl_customers.selectedRow.Phone}}",
+  "defaultText": "{{ tbl_customers.selectedRow ? tbl_customers.selectedRow.Phone : '' }}",
   "displayName": "Phone Input",
   "dynamicBindingPathList": [
     {

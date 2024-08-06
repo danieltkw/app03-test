@@ -1,12 +1,11 @@
 {
-  "gitSyncId": "667427c00dbf37519a0ae2b4_fe182b67-e33a-430b-8749-7b7f0c006778",
-  "id": "Dashboard3_utils.calculateAvFulfilTIme",
+  "gitSyncId": "668ff84389b1a8028a70bcb5_1d41295c-83ad-45eb-853c-98d836323e52",
+  "id": "Dashboard3_utils.calculateAvFulfilTime",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "isAsync": true,
       "jsArguments": [],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
@@ -24,8 +23,8 @@
       }
     ],
     "executeOnLoad": false,
-    "fullyQualifiedName": "utils.calculateAvFulfilTIme",
-    "name": "calculateAvFulfilTIme",
+    "fullyQualifiedName": "utils.calculateAvFulfilTime",
+    "name": "calculateAvFulfilTime",
     "pageId": "Dashboard3",
     "userSetOnLoad": false
   }

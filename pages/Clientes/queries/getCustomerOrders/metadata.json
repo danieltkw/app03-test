@@ -1,11 +1,11 @@
 {
   "gitSyncId": "668ff84389b1a8028a70bcb5_f92faf8a-5752-414e-b8c6-bb37c47f0da7",
-  "id": "Clientes_getCustomerOrders_",
+  "id": "Clientes_getCustomerOrders",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \"order\".*, order_status.label, \n(SELECT COUNT(*) FROM order_line WHERE order_line.order_id = \"order\".id) AS order_line_count\nFROM \"order\"\nINNER JOIN order_status ON \"order\".order_status_id = order_status.id \nWHERE account_id = {{tbl_customers.selectedRow.CustomerID}};\n",
+      "body": "SELECT \n  \"order\".*, \n  order_status.label, \n  (SELECT COUNT(*) FROM order_line WHERE order_line.order_id = \"order\".id) AS order_line_count\nFROM \"order\"\nINNER JOIN order_status ON \"order\".order_status_id = order_status.id \nWHERE account_id = {{tbl_customers.selectedRow.CustomerID}};\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -27,8 +27,8 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": false,
-    "name": "getCustomerOrders_",
+    "executeOnLoad": true,
+    "name": "getCustomerOrders",
     "pageId": "Clientes",
     "userSetOnLoad": false
   }

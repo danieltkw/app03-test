@@ -7,7 +7,17 @@
     "appPositioning": {
       "type": "FIXED"
     },
-    "navigationSetting": {}
+    "navigationSetting": {
+      "colorStyle": "theme",
+      "itemStyle": "text",
+      "logoAssetId": "",
+      "logoConfiguration": "logoAndApplicationTitle",
+      "navStyle": "stacked",
+      "orientation": "top",
+      "position": "static",
+      "showNavbar": true,
+      "showSignIn": true
+    }
   },
   "applicationVersion": 2,
   "collapseInvisibleWidgets": true,
@@ -51,6 +61,16 @@
     "appPositioning": {
       "type": "FIXED"
     },
-    "navigationSetting": {}
+    "navigationSetting": {
+      "colorStyle": "theme",
+      "itemStyle": "text",
+      "logoAssetId": "",
+      "logoConfiguration": "logoAndApplicationTitle",
+      "navStyle": "stacked",
+      "orientation": "top",
+      "position": "static",
+      "showNavbar": true,
+      "showSignIn": true
+    }
   }
 }

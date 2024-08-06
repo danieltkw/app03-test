@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n  DATE_FORMAT(created, '%Y-%m') AS month,\n  SUM(total) AS total\nFROM\n  `order`\nWHERE\n  created >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH)\nGROUP BY\n  DATE_FORMAT(created, '%Y-%m')\nORDER BY\n  month;\n\n",
+      "body": "SELECT\n  DATE_FORMAT(created, '%Y-%m') AS month,\n  SUM(total) AS total\nFROM\n  `order`\nWHERE\n  created >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH)\nGROUP BY\n  DATE_FORMAT(created, '%Y-%m')\nORDER BY\n  month;\n\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

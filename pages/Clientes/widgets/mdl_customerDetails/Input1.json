@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 39,
   "boxShadow": "none",
-  "defaultText": "{{tbl_customers.selectedRow.vat}}",
+  "defaultText": "{{tbl_customers.selectedRow ? tbl_customers.selectedRow.vat : '' }}",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {

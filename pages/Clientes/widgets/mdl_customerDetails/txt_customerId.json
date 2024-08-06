@@ -53,7 +53,7 @@
   ],
   "shouldScrollContents": true,
   "shouldTruncate": false,
-  "text": "ID Cliente: {{tbl_customers.selectedRow.ID}}\n",
+  "text": "ID Cliente: {{ tbl_customers.selectedRow ? tbl_customers.selectedRow.BillingAddress : '' }}\n",
   "textAlign": "LEFT",
   "textColor": "#231F20",
   "topRow": 1,

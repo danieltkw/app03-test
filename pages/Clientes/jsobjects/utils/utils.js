@@ -1,8 +1,8 @@
 export default {
-
     // Flag to check if we are in test mode
     isTestMode: true,
 
+    // Converts numeric IDs to a string with leading zeros and 'C' prefix
     idConverter: (num) => {
         if (num === undefined || num === null) {
             console.error('idConverter: num is undefined or null');
@@ -13,11 +13,13 @@ export default {
         return 'C' + leadingZeros + str;
     },
 
-    getCustomers: async function() {
-        console.clear();
+    // Fetches customers data
+    async getCustomers() {
+    console.clear();
+    let customers;
+    try {
         if (this.isTestMode) {
-            // Return mock data in test mode
-            return [
+            customers = [
                 {
                     ID: this.idConverter(1),
                     CustomerID: 1,
@@ -40,27 +42,34 @@ export default {
                 }
             ];
         } else {
-            const customers = await getCustomers.run();
-            return customers.map(c => {
+            const result = await getCustomers.run();
+            customers = result.map(c => {
                 return {
                     ID: this.idConverter(c.id),
                     CustomerID: c.id,
-                    Name: c.first_name + ' ' + c.last_name,
+                    Name: `${c.first_name} ${c.last_name}`,
                     Phone: c.phone,
                     Email: c.email,
-                    BillingAddress: `${c.address1}${ c.city || ''}${ c.country || ''}`,
-                    ShippingAddress: `${c.address1}${ c.city || ''}${ c.country || ''}`,
+                    BillingAddress: `${c.address1 || ''}${c.city || ''}${c.country || ''}`,
+                    ShippingAddress: `${c.address1 || ''}${c.city || ''}${c.country || ''}`,
                     vat: c.vat
                 };
             });
         }
-    },
+    } catch (error) {
+        console.error('Error in getCustomers:', error);
+        customers = [];
+    }
+    return customers;
+	},
 
-    getCustomerOrders: async function() {
-        console.clear();
+    // Fetches customer orders based on selected customer
+    async getCustomerOrders() {
+    console.clear();
+    let customerOrders;
+    try {
         if (this.isTestMode) {
-            // Return mock data in test mode
-            return [
+            customerOrders = [
                 {
                     OrderId: 1,
                     OrderDate: new Date().toDateString(),
@@ -77,62 +86,76 @@ export default {
                 }
             ];
         } else {
-            const customerOrders = await getCustomerOrders.run();
-            return customerOrders.map(o => {
-                return {
-                    OrderId: o.id,
-                    OrderDate: new Date(o.created).toDateString(),
-                    Items: o.order_line_count,
-                    Amount: o.total.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-                    Status: o.label
-                };
-            });
+            if (tbl_customers.selectedRow && tbl_customers.selectedRow.CustomerID) {
+                const result = await getCustomerOrders.run();
+                customerOrders = result.map(o => {
+                    return {
+                        OrderId: o.id,
+                        OrderDate: new Date(o.created).toDateString(),
+                        Items: o.order_line_count,
+                        Amount: o.total.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
+                        Status: o.label
+                    };
+                });
+            } else {
+                console.error('getCustomerOrders: tbl_customers.selectedRow.CustomerID is undefined');
+                customerOrders = [];
+            }
         }
-    },
+    } catch (error) {
+        console.error('Error in getCustomerOrders:', error);
+        customerOrders = [];
+    }
+    return customerOrders;
+	},
 
+    // Returns color based on order status
     statusColor: (status) => {
-        if (status === 'CANCELLED') {
-            return 'RGB(255, 0, 0)';
+        switch(status) {
+            case 'CANCELLED':
+                return 'RGB(255, 0, 0)';
+            case 'UNFULFILLED':
+            case 'PACKED':
+                return 'RGB(255, 165, 0)';
+            case 'SHIPPED':
+            case 'DELIVERED':
+                return 'RGB(0, 128, 0)';
+            default:
+                return 'RGB(255, 165, 0)';
         }
-        if (status === 'UNFULFILLED' || status === 'PACKED') {
-            return 'RGB(255, 165, 0)';
-        }
-        if (status === 'SHIPPED' || status === 'DELIVERED') {
-            return 'RGB(0, 128, 0)';
-        }
-        return 'RGB(255, 165, 0)';
     },
 
+    // Adds a new customer
     addCustomer: async function() {
-        console.clear();
-        if (this.isTestMode) {
-            showAlert('Customer created (test mode)!', 'success');
-            return {
-                ID: this.idConverter(3),
-                CustomerID: 3,
-                Name: 'Test User',
-                Phone: '000-000-0000',
-                Email: 'test.user@example.com',
-                BillingAddress: 'Test Address',
-                ShippingAddress: 'Test Address',
-                vat: '000000000'
-            };
-        } else {
-            const person = await createPerson.run();
-            await createAccount.run({
-                personId: person[0].id
-            });
-            await createLocation.run({
-                personId: person[0].id
-            });
-            closeModal('mdl_addCustomer');
-            await this.getCustomers();
-            showAlert('Customer created!', 'success');
+        console.clear();  // Clears the console for clean debugging
+        try {
+            if (this.isTestMode) {
+                showAlert('Customer created (test mode)!', 'success');
+                return {
+                    ID: this.idConverter(3),
+                    CustomerID: 3,
+                    Name: 'Test User',
+                    Phone: '000-000-0000',
+                    Email: 'test.user@example.com',
+                    BillingAddress: 'Test Address',
+                    ShippingAddress: 'Test Address',
+                    vat: '000000000'
+                };
+            } else {
+                const person = await createPerson.run();  // Runs the query to create a person
+                await createAccount.run({ personId: person[0].id });  // Runs the query to create an account
+                await createLocation.run({ personId: person[0].id });  // Runs the query to create a location
+                closeModal('mdl_addCustomer');  // Closes the modal
+                await this.getCustomers();  // Refreshes the customers list
+                showAlert('Customer created!', 'success');
+            }
+        } catch (error) {
+            console.error('Error in addCustomer:', error);
         }
     }
 };
 
-// ------------------------------------------------------------
+
 
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
