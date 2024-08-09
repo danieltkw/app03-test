@@ -6,15 +6,6 @@
     "pageId": "Dashboard3",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "variables": [
-      {
-        "name": "defaultTab",
-        "value": "'Sign In'"
-      },
-      {
-        "name": "testMode",
-        "value": "true"
-      }
-    ]
+    "variables": []
   }
 }

@@ -1,74 +1,13 @@
 export default {
-  defaultTab: 'Sign In',
-  testMode: true, // Set this to false to turn off test mode
-
-  setDefaultTab(newTab) {
-    this.defaultTab = newTab;
-  },
-
-  generateRandomValue() {
-    return Math.random().toString(36).substring(2, 15);
-  },
-
-  generatePasswordHash() {
-    const password = inp_registerPassword?.text || this.generateRandomValue();
-    if (!inp_registerPassword?.text) {
-      showAlert('No password entered, using random test value: ' + password, 'warning');
-    }
-    return dcodeIO.bcrypt.hashSync(password, 10);
-  },
-
-  async createToken(user) {
-    return jsonwebtoken.sign(user, 'secret', { expiresIn: 60 * 60 });
-  },
-
-  async signIn() {
-    const email = inp_email?.text || 'test@example.com';
-    const password = inp_password?.text || 'password123';
-
-    const [user] = await findUserByEmail.run({ email });
-
-    if (user && this.verifyHash(password, user.password_hash)) {
-      await storeValue('token', await this.createToken(user));
-      await updateLogin.run({ id: user.id });
-      showAlert('Login Success', 'success');
-    } else {
-      showAlert('Invalid email/password combination', 'error');
-    }
-  },
-
-  async register() {
-    const passwordHash = this.generatePasswordHash();
-    const firstName = inp_firstName?.text || 'John';
-    const lastName = inp_lastName?.text || 'Doe';
-    const email = inp_registerEmail?.text || 'test@example.com';
-
-    const [user] = await createUser.run({
-      firstName,
-      lastName,
-      email,
-      passwordHash
-    });
-
-    if (user) {
-      await storeValue('token', await this.createToken(user));
-      showAlert('Register Success', 'success');
-    } else {
-      showAlert('Error creating new user', 'error');
-    }
-  },
-
-  verifyHash(password, hash) {
-    return dcodeIO.bcrypt.compareSync(password, hash);
-  },
-
-  async generateInvoice() {
-    const doc = new jsPDF();
+  // Function to generate an invoice PDF
+  generateInvoice: async () => {
+    const doc = new jspdf();
     doc.text("Hello, World!", 10, 10);
     doc.save("example.pdf");
   },
 
-  async dashboardMetrics() {
+  // Function to fetch and calculate dashboard metrics
+  dashboardMetrics: async () => {
     const orders = await getOrders.run();
     const returnsCount = await getReturnsCount.run();
 
@@ -93,24 +32,26 @@ export default {
     };
   },
 
-  async topOrderedProductsChart() {
+  // Function to fetch and format data for the top ordered products chart
+  topOrderedProductsChart: async () => {
     const orderedProductsCount = await getOrderProductCount.run();
 
     return orderedProductsCount.map(p => {
       return {
         x: p.name,
-        y: p.variant_count
+        y: p.variant_count,
       };
     });
   },
 
-  async revenueChart() {
+  // Function to fetch and format data for the revenue chart
+  revenueChart: async () => {
     try {
       const revenueByMonth = await getRevenueByMonth.run();
 
       const months = [
-        'January', 'February', 'March', 'April', 'May', 'June', 'July',
-        'August', 'September', 'October', 'November', 'December'
+        'January', 'February', 'March', 'April', 'May', 'June', 
+        'July', 'August', 'September', 'October', 'November', 'December'
       ];
 
       return revenueByMonth.map(r => {
@@ -125,7 +66,8 @@ export default {
     }
   },
 
-  async calculateAvFulfilTime() {
+  // Function to calculate the average fulfillment time
+  calculateAvFulfilTIme: async () => {
     const data = await getReturns.run();
 
     const orders = {};
@@ -170,6 +112,8 @@ export default {
     return overallAvg ? overallAvg.toFixed(2) : 1.2;
   }
 };
+
+
 
 // ------------------------------------------------------------
 // // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com

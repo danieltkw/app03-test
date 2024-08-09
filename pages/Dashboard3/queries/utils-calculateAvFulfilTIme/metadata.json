@@ -1,6 +1,6 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_9dd192a4-4fa5-4ab7-a19d-12bec8914fdf",
-  "id": "Dashboard3_utils.generateRandomValue",
+  "gitSyncId": "668ff84389b1a8028a70bcb5_d8d99135-0daa-4f46-be75-e10447cd10c4",
+  "id": "Dashboard3_utils.calculateAvFulfilTIme",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
@@ -23,8 +23,8 @@
       }
     ],
     "executeOnLoad": false,
-    "fullyQualifiedName": "utils.generateRandomValue",
-    "name": "generateRandomValue",
+    "fullyQualifiedName": "utils.calculateAvFulfilTIme",
+    "name": "calculateAvFulfilTIme",
     "pageId": "Dashboard3",
     "userSetOnLoad": false
   }
