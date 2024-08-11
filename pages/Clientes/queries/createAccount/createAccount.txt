@@ -1,2 +1,2 @@
-INSERT INTO account (customer_id)
-VALUES ({{this.params.personId}});
+-- INSERT INTO account (customer_id)
+-- VALUES ({{this.params.personId}});

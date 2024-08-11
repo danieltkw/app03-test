@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_e21fff1b-48bd-4ca7-bcc7-1561d514bab1",
-  "id": "Products_getProducts",
+  "gitSyncId": "66b91aa416e9244321599197_ca3025f9-61db-4681-a523-edb979d138ea",
+  "id": "Clientes_getCustomerByEmail",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n  p.product_id AS id,\n  p.name AS name,\n  p.category AS category,\n  p.description AS description,\n  p.warehouse_location AS location,\n  p.price AS price,\n  p.sku AS sku,\n  p.total_stock AS total_stock\nFROM \n  db_products p\nORDER BY \n  p.product_id\nLIMIT {{tbl_products.pageSize}} OFFSET {{(tbl_products.pageNo - 1) * tbl_products.pageSize}};\n\n\n",
+      "body": "SELECT \n    user_id,\n    email,\n    password_hash,\n    first_name,\n    last_name,\n    phone,\n    vat_number,\n    billing_address,\n    shipping_address\nFROM \n    db_users\nWHERE \n    email = '{{this.params.email}}';\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -27,9 +27,9 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": false,
-    "name": "getProducts",
-    "pageId": "Products",
+    "executeOnLoad": true,
+    "name": "getCustomerByEmail",
+    "pageId": "Clientes",
     "userSetOnLoad": false
   }
 }

@@ -35,9 +35,10 @@
     "OrderDate",
     "Items",
     "Amount",
-    "Status"
+    "Status",
+    "customColumn1"
   ],
-  "columnUpdatedAt": 1719003840809,
+  "columnUpdatedAt": 1723411941881,
   "columnWidthMap": {
     "discount": 155,
     "id": 77,
@@ -83,6 +84,9 @@
     },
     {
       "key": "primaryColumns.Status.textColor"
+    },
+    {
+      "key": "primaryColumns.customColumn1.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -246,6 +250,39 @@
       "sticky": "",
       "textColor": "{{tbl_customerOrders.processedTableData.map((currentRow, currentIndex) => ( utils.statusColor(currentRow.Status)))}}",
       "textSize": "0.875rem",
+      "validation": {},
+      "verticalAlignment": "CENTER",
+      "width": 150
+    },
+    "customColumn1": {
+      "alias": "Email",
+      "allowCellWrapping": false,
+      "allowSameOptionsInNewRow": true,
+      "buttonStyle": "rgb(3, 179, 101)",
+      "columnType": "text",
+      "computedValue": "{{tbl_customerOrders.processedTableData.map((currentRow, currentIndex) => ( getCustomerByEmail.data.email))}}",
+      "currencyCode": "USD",
+      "decimals": 0,
+      "enableFilter": true,
+      "enableSort": true,
+      "horizontalAlignment": "LEFT",
+      "id": "customColumn1",
+      "index": 7,
+      "isCellEditable": false,
+      "isCellVisible": true,
+      "isDerived": true,
+      "isDisabled": false,
+      "isDiscardVisible": true,
+      "isEditable": false,
+      "isSaveVisible": true,
+      "isVisible": true,
+      "label": "Email",
+      "labelColor": "#FFFFFF",
+      "notation": "standard",
+      "originalId": "customColumn1",
+      "sticky": "",
+      "textSize": "0.875rem",
+      "thousandSeparator": true,
       "validation": {},
       "verticalAlignment": "CENTER",
       "width": 150

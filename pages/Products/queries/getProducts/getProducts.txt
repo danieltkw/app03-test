@@ -1,22 +1,16 @@
 SELECT 
-  p.id AS id,
+  p.product_id AS id,
   p.name AS name,
-  p.type AS category,
+  p.category AS category,
   p.description AS description,
-  p.image AS image,
-  v.id AS product_variant_id,
-  v.price AS price,
-  v.cost AS cost,
-  v.sku AS sku,
-  v.low_stock AS low_stock,
-  SUM(pl.stock) AS total_stock
+  p.warehouse_location AS location,
+  p.price AS price,
+  p.sku AS sku,
+  p.total_stock AS total_stock
 FROM 
-  product p 
-  INNER JOIN product_variant v ON p.id = v.product_id 
-  LEFT JOIN product_location pl ON v.id = pl.product_variant_id
-GROUP BY 
-  p.id, p.name, p.type, p.description, p.image, v.id, v.price, v.cost, v.sku, v.low_stock
+  db_products p
 ORDER BY 
-  p.id, v.id
+  p.product_id
 LIMIT {{tbl_products.pageSize}} OFFSET {{(tbl_products.pageNo - 1) * tbl_products.pageSize}};
+
 

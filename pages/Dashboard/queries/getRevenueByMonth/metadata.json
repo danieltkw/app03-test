@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_10318ace-3438-47a4-8abb-9d5a2affaa69",
-  "id": "Clientes_createAccount",
+  "gitSyncId": "668ff84389b1a8028a70bcb5_d6864559-5ac9-4632-a942-a02f91fce491",
+  "id": "Dashboard_getRevenueByMonth",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- INSERT INTO account (customer_id)\n-- VALUES ({{this.params.personId}});\n",
+      "body": "SELECT\n  DATE_FORMAT(created, '%Y-%m') AS month,\n  SUM(total) AS total\nFROM\n  `order`\nWHERE\n  created >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH)\nGROUP BY\n  DATE_FORMAT(created, '%Y-%m')\nORDER BY\n  month;\n\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -22,14 +22,10 @@
       "name": "appsmith_dba",
       "pluginId": "mysql-plugin"
     },
-    "dynamicBindingPathList": [
-      {
-        "key": "body"
-      }
-    ],
+    "dynamicBindingPathList": [],
     "executeOnLoad": false,
-    "name": "createAccount",
-    "pageId": "Clientes",
+    "name": "getRevenueByMonth",
+    "pageId": "Dashboard",
     "userSetOnLoad": false
   }
 }

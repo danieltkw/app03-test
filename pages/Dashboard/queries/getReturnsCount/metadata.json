@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_10318ace-3438-47a4-8abb-9d5a2affaa69",
-  "id": "Clientes_createAccount",
+  "gitSyncId": "668ff84389b1a8028a70bcb5_9e1a3da1-3d77-40dd-ae6d-4f7466c92455",
+  "id": "Dashboard_getReturnsCount",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- INSERT INTO account (customer_id)\n-- VALUES ({{this.params.personId}});\n",
+      "body": "SELECT COUNT(*) FROM returns;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -22,14 +22,10 @@
       "name": "appsmith_dba",
       "pluginId": "mysql-plugin"
     },
-    "dynamicBindingPathList": [
-      {
-        "key": "body"
-      }
-    ],
+    "dynamicBindingPathList": [],
     "executeOnLoad": false,
-    "name": "createAccount",
-    "pageId": "Clientes",
+    "name": "getReturnsCount",
+    "pageId": "Dashboard",
     "userSetOnLoad": false
   }
 }

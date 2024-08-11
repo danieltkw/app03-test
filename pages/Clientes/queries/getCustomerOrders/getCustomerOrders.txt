@@ -4,6 +4,7 @@ SELECT
   (SELECT COUNT(*) FROM order_line WHERE order_line.order_id = "order".id) AS order_line_count
 FROM "order"
 INNER JOIN order_status ON "order".order_status_id = order_status.id 
-WHERE account_id = {{tbl_customers.selectedRow.CustomerID}};
+WHERE account_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.CustomerID : 0}}';
+
 
 

@@ -1,6 +1,0 @@
-INSERT INTO example_table (
-	name,
-	description)
-VALUES (
-	'{{insert_form.formData.name}}',
-	'{{insert_form.formData.description}}');

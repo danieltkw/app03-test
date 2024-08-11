@@ -1,0 +1,14 @@
+SELECT 
+    user_id,
+    email,
+    password_hash,
+    first_name,
+    last_name,
+    phone,
+    vat_number,
+    billing_address,
+    shipping_address
+FROM 
+    db_users
+WHERE 
+    email = '{{this.params.email}}';
