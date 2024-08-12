@@ -1,7 +1,4 @@
 export default {
-    // Flag to check if we are in test mode
-    isTestMode: true,
-
     // Converts numeric IDs to a string with leading zeros and 'C' prefix
     idConverter: (num) => {
         if (num === undefined || num === null) {
@@ -18,47 +15,45 @@ export default {
         console.clear();
         let customers;
         try {
-            if (this.isTestMode) {
-                customers = [
-                    {
-                        ID: this.idConverter(1),
-                        CustomerID: 1,
-                        Name: 'John Doe',
-                        Phone: '123-456-7890',
-                        Email: 'john.doe@example.com',
-                        BillingAddress: '123 Main St',
-                        ShippingAddress: '123 Main St',
-                        vat: '123456789'
-                    },
-                    {
-                        ID: this.idConverter(2),
-                        CustomerID: 2,
-                        Name: 'Jane Smith',
-                        Phone: '987-654-3210',
-                        Email: 'jane.smith@example.com',
-                        BillingAddress: '456 Elm St',
-                        ShippingAddress: '456 Elm St',
-                        vat: '987654321'
-                    }
-                ];
-            } else {
-                const result = await getCustomers.run();  // Ensure getCustomers is properly defined in your app
-                customers = result.map(c => {
-                    return {
-                        ID: this.idConverter(c.user_id),
-                        CustomerID: c.user_id,
-                        Name: `${c.first_name} ${c.last_name}`,
-                        Phone: c.phone,
-                        Email: c.email,
-                        BillingAddress: c.billing_address || '',  // Ensure fields exist in the query result
-                        ShippingAddress: c.shipping_address || '', // Ensure fields exist in the query result
-                        vat: c.vat_number
-                    };
-                });
-            }
+            // Attempt to fetch data from the database
+            const result = await getCustomers.run();  // Ensure getCustomers is correctly set up in Appsmith
+            customers = result.map(c => {
+                return {
+                    ID: this.idConverter(c.user_id),
+                    CustomerID: c.user_id,
+                    Name: `${c.first_name} ${c.last_name}`,
+                    Phone: c.phone,
+                    Email: c.email,
+                    BillingAddress: c.billing_address || '',  // Fallback to empty string if undefined
+                    ShippingAddress: c.shipping_address || '', // Fallback to empty string if undefined
+                    vat: c.vat_number
+                };
+            });
         } catch (error) {
-            console.error('Error in getCustomers:', error);
-            customers = [];
+            // If an error occurs, log it and fall back to Test Mode
+            console.error('Error fetching customers from database, falling back to test mode:', error);
+            customers = [
+                {
+                    ID: this.idConverter(1),
+                    CustomerID: 1,
+                    Name: 'John Doe',
+                    Phone: '123-456-7890',
+                    Email: 'john.doe@example.com',
+                    BillingAddress: '123 Main St',
+                    ShippingAddress: '123 Main St',
+                    vat: '123456789'
+                },
+                {
+                    ID: this.idConverter(2),
+                    CustomerID: 2,
+                    Name: 'Jane Smith',
+                    Phone: '987-654-3210',
+                    Email: 'jane.smith@example.com',
+                    BillingAddress: '456 Elm St',
+                    ShippingAddress: '456 Elm St',
+                    vat: '987654321'
+                }
+            ];
         }
         return customers;
     },
@@ -68,44 +63,42 @@ export default {
         console.clear();
         let customerOrders;
         try {
-            if (this.isTestMode) {
-                customerOrders = [
-                    {
-                        OrderId: 1,
-                        OrderDate: new Date().toDateString(),
-                        Items: 3,
-                        Amount: '150.00',
-                        Status: 'DELIVERED'
-                    },
-                    {
-                        OrderId: 2,
-                        OrderDate: new Date().toDateString(),
-                        Items: 1,
-                        Amount: '50.00',
-                        Status: 'SHIPPED'
-                    }
-                ];
+            // Attempt to fetch data from the database
+            const selectedRow = tbl_customers.selectedRow;
+            if (selectedRow && selectedRow.CustomerID) {
+                const result = await getCustomerOrders.run();  // Ensure getCustomerOrders is properly defined
+                customerOrders = result.map(o => {
+                    return {
+                        OrderId: o.order_id,
+                        OrderDate: new Date(o.created).toDateString(),
+                        Items: o.items_count,
+                        Amount: o.total.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' }),
+                        Status: o.delivery_status
+                    };
+                });
             } else {
-                const selectedRow = tbl_customers.selectedRow;
-                if (selectedRow && selectedRow.CustomerID) {
-                    const result = await getCustomerOrders.run();  // Ensure getCustomerOrders is properly defined
-                    customerOrders = result.map(o => {
-                        return {
-                            OrderId: o.order_id,
-                            OrderDate: new Date(o.created).toDateString(),
-                            Items: o.items_count,
-                            Amount: o.total.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-                            Status: o.delivery_status
-                        };
-                    });
-                } else {
-                    console.error('getCustomerOrders: tbl_customers.selectedRow.CustomerID is undefined');
-                    customerOrders = [];
-                }
+                console.error('getCustomerOrders: tbl_customers.selectedRow.CustomerID is undefined');
+                customerOrders = [];
             }
         } catch (error) {
-            console.error('Error in getCustomerOrders:', error);
-            customerOrders = [];
+            // If an error occurs, log it and fall back to Test Mode
+            console.error('Error fetching customer orders from database, falling back to test mode:', error);
+            customerOrders = [
+                {
+                    OrderId: 1,
+                    OrderDate: new Date().toDateString(),
+                    Items: 3,
+                    Amount: '150.00 €',
+                    Status: 'DELIVERED'
+                },
+                {
+                    OrderId: 2,
+                    OrderDate: new Date().toDateString(),
+                    Items: 1,
+                    Amount: '50.00 €',
+                    Status: 'SHIPPED'
+                }
+            ];
         }
         return customerOrders;
     },
@@ -126,10 +119,12 @@ export default {
         }
     },
 
- 
-
     // Formats customer data for use in the application
     formatCustomerData: function (customer) {
+        if (!customer) {
+            console.error('formatCustomerData: customer is undefined');
+            return {};
+        }
         return {
             ID: this.idConverter(customer.user_id),
             CustomerID: customer.user_id,
@@ -142,7 +137,6 @@ export default {
         };
     }
 };
-
 
 
 /*

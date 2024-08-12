@@ -21,6 +21,12 @@
   "dynamicPropertyPathList": [
     {
       "key": "sourceData"
+    },
+    {
+      "key": "optionValue"
+    },
+    {
+      "key": "optionLabel"
     }
   ],
   "dynamicTriggerPathList": [
@@ -61,7 +67,7 @@
     "dropdown"
   ],
   "serverSideFiltering": false,
-  "sourceData": "{{\n    utils.getCategories.data.map(c => ({\n        label: c.name,\n        value: c.name\n    }))\n}}\n",
+  "sourceData": "{{utils.getCategories.data}}\n",
   "topRow": 2,
   "type": "SELECT_WIDGET",
   "version": 1,

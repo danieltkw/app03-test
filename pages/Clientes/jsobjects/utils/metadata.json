@@ -6,11 +6,6 @@
     "pageId": "Clientes",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "variables": [
-      {
-        "name": "isTestMode",
-        "value": "true"
-      }
-    ]
+    "variables": []
   }
 }

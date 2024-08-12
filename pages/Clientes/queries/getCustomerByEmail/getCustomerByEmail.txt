@@ -1,3 +1,4 @@
+-- getCustomerByEmail
 SELECT 
     user_id,
     email,
@@ -12,3 +13,4 @@ FROM
     db_users
 WHERE 
     email = '{{this.params.email}}';
+

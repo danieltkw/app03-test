@@ -14,3 +14,5 @@ ORDER BY
 LIMIT {{tbl_products.pageSize}} OFFSET {{(tbl_products.pageNo - 1) * tbl_products.pageSize}};
 
 
+
+

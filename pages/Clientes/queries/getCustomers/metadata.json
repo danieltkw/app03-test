@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n  clients.*, \n  person.first_name, \n  person.last_name, \n  person.email, \n  person.phone, \n  location.address1, \n  location.city, \n  location.state, \n  location.country, \n  location.postal_code, \n  location.vat \nFROM clients\nLEFT JOIN person ON clients.id = person.id\nLEFT JOIN location ON person.id = location.person\nLIMIT {{tbl_customers.pageSize}} OFFSET {{(tbl_customers.pageNo - 1) * tbl_customers.pageSize}};\n\n\n\n\n",
+      "body": "-- getCustomers\nSELECT \n  clients.*, \n  person.first_name, \n  person.last_name, \n  person.email, \n  person.phone, \n  location.address1, \n  location.city, \n  location.state, \n  location.country, \n  location.postal_code, \n  location.vat \nFROM clients\nLEFT JOIN person ON clients.id = person.id\nLEFT JOIN location ON person.id = location.person\nLIMIT {{tbl_customers.pageSize}} OFFSET {{(tbl_customers.pageNo - 1) * tbl_customers.pageSize}};\n\n\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
