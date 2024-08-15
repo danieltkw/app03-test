@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_1c19684a-4085-4cd0-bf8e-42597579d6c4",
-  "id": "Pedidos_Query1",
+  "gitSyncId": "66b91aa416e9244321599197_b1fcea03-476f-4a78-a4d4-d7013337ffec",
+  "id": "Returns Copy_getProducts",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT * FROM order_line LIMIT 10;",
+      "body": "-- getProducts\nSELECT * FROM products WHERE client_id = {{clientId}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -22,10 +22,14 @@
       "name": "appsmith_dba",
       "pluginId": "mysql-plugin"
     },
-    "dynamicBindingPathList": [],
+    "dynamicBindingPathList": [
+      {
+        "key": "body"
+      }
+    ],
     "executeOnLoad": false,
-    "name": "Query1",
-    "pageId": "Pedidos",
+    "name": "getProducts",
+    "pageId": "Returns Copy",
     "userSetOnLoad": false
   }
 }

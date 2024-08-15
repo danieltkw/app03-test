@@ -1,0 +1,3 @@
+-- getInvoice 
+SELECT * FROM invoices WHERE client_id = {{clientId}};
+

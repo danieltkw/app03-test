@@ -1,7 +1,8 @@
-INSERT INTO order_track
-  (order_id, order_status_id)
-VALUES
-  (
-    {{ appsmith.store.order.Order_id }},
-    {{ this.params.orderStatusId }}
-  );
+-- record Order Track
+SELECT order_track.*, 
+       order_status.label 
+FROM order_track 
+INNER JOIN order_status ON order_track.order_status_id = order_status.id
+WHERE order_track.order_id = {{appsmith.store.order.Order_id || 1}};
+
+

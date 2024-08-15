@@ -1,0 +1,2 @@
+-- getProducts
+SELECT * FROM products WHERE client_id = {{clientId}};

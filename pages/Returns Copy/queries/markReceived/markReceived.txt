@@ -1,0 +1,2 @@
+-- markReceived
+UPDATE returns SET status = 'Received' WHERE id = {{selectedRow.Id}};

@@ -48,6 +48,10 @@
     {
       "id": "Login",
       "isDefault": true
+    },
+    {
+      "id": "Returns Copy",
+      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {

@@ -1,0 +1,2 @@
+-- handleRefund
+UPDATE returns SET status = 'Refunded' WHERE id = {{selectedRow.Id}};

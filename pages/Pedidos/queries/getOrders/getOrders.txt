@@ -13,3 +13,4 @@ INNER JOIN account ON `order`.account_id = account.id
 INNER JOIN person ON account.customer_id = person.id
 ORDER BY id ASC
 LIMIT {{tbl_orders.pageSize}} OFFSET {{(tbl_orders.pageNo - 1) * tbl_orders.pageSize}};
+

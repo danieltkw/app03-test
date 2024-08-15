@@ -133,6 +133,61 @@
       "version": 1,
       "widgetId": "i8kxz9v6xg",
       "widgetName": "Canvas15"
+    },
+    {
+      "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+      "bottomRow": 770,
+      "boxShadow": "{{appsmith.theme.boxShadow.appBoxShadow}}",
+      "canExtend": false,
+      "containerStyle": "none",
+      "detachFromLayout": true,
+      "displayName": "Canvas",
+      "dynamicBindingPathList": [
+        {
+          "key": "borderRadius"
+        },
+        {
+          "key": "boxShadow"
+        }
+      ],
+      "dynamicHeight": "AUTO_HEIGHT",
+      "dynamicTriggerPathList": [],
+      "flexLayers": [],
+      "hideCard": true,
+      "isDeprecated": false,
+      "isLoading": false,
+      "isVisible": true,
+      "key": "bxsh730ql8",
+      "leftColumn": 0,
+      "maxDynamicHeight": 9000,
+      "minDynamicHeight": 4,
+      "minHeight": 810,
+      "minWidth": 450,
+      "mobileBottomRow": 811,
+      "mobileLeftColumn": 0,
+      "mobileRightColumn": 1072,
+      "mobileTopRow": 1,
+      "needsErrorInfo": false,
+      "onCanvasUI": {
+        "disableParentSelection": true,
+        "focusBGCSSVar": "--on-canvas-ui-widget-focus",
+        "focusColorCSSVar": "--on-canvas-ui-widget-selection",
+        "selectionBGCSSVar": "--on-canvas-ui-widget-selection",
+        "selectionColorCSSVar": "--on-canvas-ui-widget-focus"
+      },
+      "parentColumnSpace": 1,
+      "parentId": "5qomekaidx",
+      "parentRowSpace": 1,
+      "renderMode": "CANVAS",
+      "responsiveBehavior": "fill",
+      "rightColumn": 1072,
+      "tabId": "tab1w7ufm5hep",
+      "tabName": "Sales Order",
+      "topRow": 1,
+      "type": "CANVAS_WIDGET",
+      "version": 1,
+      "widgetId": "5w8y05l2pd",
+      "widgetName": "Canvas19"
     }
   ],
   "defaultTab": "Sales Order",
@@ -198,9 +253,16 @@
     "tab1oc6ctzihz": {
       "id": "tab1oc6ctzihz",
       "index": 3,
-      "isVisible": "{{tbl_orders.selectedRow.Status == 'SHIPPED' || tbl_orders.selectedRow.Status == 'DELIVERED'}}",
+      "isVisible": "{{tbl_orders.selectedRow ? (tbl_orders.selectedRow.Status == 'SHIPPED' || tbl_orders.selectedRow.Status == 'DELIVERED') : false}}\n",
       "label": "Rastreio",
       "widgetId": "i8kxz9v6xg"
+    },
+    "tab1w7ufm5hep": {
+      "id": "tab1w7ufm5hep",
+      "index": 4,
+      "isVisible": true,
+      "label": "Sales Order",
+      "widgetId": "5w8y05l2pd"
     },
     "tab2": {
       "id": "tab2",

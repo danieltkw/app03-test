@@ -9,7 +9,7 @@
     "variables": [
       {
         "name": "isTestMode",
-        "value": "true"
+        "value": "false"
       }
     ]
   }

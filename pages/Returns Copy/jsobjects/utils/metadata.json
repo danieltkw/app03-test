@@ -1,0 +1,16 @@
+{
+  "gitSyncId": "66b91aa416e9244321599197_29db3ecc-5fc8-4c91-97ef-27f4ffc2d09b",
+  "id": "Returns Copy_utils",
+  "unpublishedCollection": {
+    "name": "utils",
+    "pageId": "Returns Copy",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "isTestMode",
+        "value": "true"
+      }
+    ]
+  }
+}

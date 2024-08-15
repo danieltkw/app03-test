@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- Update order status\nUPDATE `order`\nSET order_status_id = {{this.params.statusId}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n",
+      "body": "-- Update order status\nUPDATE `order`\nSET order_status_id = {{this.params.statusId}}\nWHERE id = {{ appsmith.store.order.Order_id }};\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

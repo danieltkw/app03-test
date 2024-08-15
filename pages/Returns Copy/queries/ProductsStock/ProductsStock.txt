@@ -1,0 +1,3 @@
+-- Products and Stock 
+SELECT * FROM db_products;
+

@@ -1,0 +1,2 @@
+-- PendingRequests 
+SELECT * FROM db_requests WHERE user_id = {{clientId}};

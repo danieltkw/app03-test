@@ -1,14 +1,15 @@
--- Get order products
+-- getOrderProducts
 SELECT order_line.*, 
-       product_variant.sku, 
-       product_variant.price, 
-       product.image, 
+       db_products.sku, 
+       db_products.price, 
+       db_products.image, 
        `order`.total, 
        `order`.taxes, 
        `order`.subtotal, 
-       product.name
+       db_products.name
 FROM order_line 
-INNER JOIN product_variant ON order_line.product_variant_id = product_variant.id
-INNER JOIN `order` ON order_line.order_id = `order`.id
-INNER JOIN product ON product_variant.product_id = product.id
-WHERE order_line.order_id = {{appsmith.store.order.Order_id}};
+INNER JOIN db_products ON order_line.product_id = db_products.product_id
+INNER JOIN `order` ON order_line.order_id = `order`.order_id
+WHERE order_line.order_id = {{appsmith.store.order.Order_id}}; 
+
+

@@ -1,6 +1,6 @@
 export default {
     // Flag to check if we are in test mode
-    isTestMode: true,
+    isTestMode: false,
 
     idConverter: (num) => {
         if (num === undefined || num === null) {
@@ -15,122 +15,92 @@ export default {
     getReturns: async function() {
         console.clear();
 
-        if (this.isTestMode) {
-            // Return mock data in test mode
-            return [
-                {
-                    id: 1,
-                    order_id: 101,
-                    product_variant_id: 201,
-                    quantity: 2,
-                    product_id: 301,
-                    price: 20.5,
-                    name: 'Test Product',
-                    type: 'Electronics',
-                    label: 'Main Warehouse',
-                    created: '2023-01-01T00:00:00Z',
-                    returned_quantity: 2,
-                    returned_date: '2023-01-05T00:00:00Z',
-                    reason: 'Defective',
-                    status: 'Return Initiated',
-                    warehouse: 'Main Warehouse',
-                    warehouse_id: 1
-                },
-                // More mock data if needed...
-            ];
-        }
+        try {
+            const returns = await getReturns.run();
+            const fromDate = dat_from.formattedDate || null;
+            const toDate = dat_to.formattedDate || null;
 
-        const returns = await getReturns.run();
+            let filteredReturns = returns;
 
-        const fromDate = dat_from.formattedDate || null;
-        const toDate = dat_to.formattedDate || null;
-
-        let filteredReturns = returns;
-
-        // Filter based on date range if fromDate and toDate are provided
-        if (fromDate && toDate) {
-            filteredReturns = returns.filter(k => new Date(k.created) >= new Date(fromDate) && new Date(k.created) <= new Date(toDate));
-        }
-
-        // Filter based on status if sel_status is provided
-        if (sel_status.selectedOptionValue) {
-            filteredReturns = returns.filter(k => k.status === sel_status.selectedOptionValue);
-        }
-
-        return filteredReturns.map(r => {
-            return {
-                Id: r.id,
-                ID: this.idConverter(r.id),
-                OrderID: r.order_id,
-                Product: r.name,
-                Description: r.category,
-                ShippedQty: r.quantity,
-                Quantity: r.returned_quantity,
-                Amount: r.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-                ReturnOrderID: 1,
-                WarehouseName: r.label,
-                ReturnedDate: new Date(r.returned_date).toDateString(),
-                Reason: r.reason,
-                Status: r.status,
-                Warehouse: r.warehouse,
-                WarehouseId: r.warehouse_id
+            // Filter based on date range if fromDate and toDate are provided
+            if (fromDate && toDate) {
+                filteredReturns = returns.filter(k => new Date(k.created) >= new Date(fromDate) && new Date(k.created) <= new Date(toDate));
             }
-        }).sort((a, b) => a.id - b.id);
+
+            // Filter based on status if sel_status is provided
+            if (sel_status.selectedOptionValue) {
+                filteredReturns = filteredReturns.filter(k => k.status === sel_status.selectedOptionValue);
+            }
+
+            return filteredReturns.map(r => {
+                return {
+                    Id: r.id,
+                    ID: this.idConverter(r.id),
+                    OrderID: r.order_id,
+                    Product: r.name,
+                    Description: r.category,
+                    ShippedQty: r.quantity,
+                    Quantity: r.returned_quantity,
+                    Amount: r.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
+                    ReturnOrderID: 1,
+                    WarehouseName: r.label,
+                    ReturnedDate: new Date(r.returned_date).toDateString(),
+                    Reason: r.reason,
+                    Status: r.status,
+                    Warehouse: r.warehouse,
+                    WarehouseId: r.warehouse_id
+                }
+            }).sort((a, b) => a.id - b.id);
+        } catch (error) {
+            console.error('Error fetching returns:', error);
+            return [];
+        }
     },
 
     getWarehouses: async function() {
-        if (this.isTestMode) {
-            // Return mock data in test mode
-            return [
-                { id: 1, name: 'Test Warehouse 1' },
-                { id: 2, name: 'Test Warehouse 2' }
-            ];
-        }
+        try {
+            const returns = await getReturns.run();
+            const warehouses = returns.map(p => {
+                return {
+                    id: p.warehouse_id,
+                    name: p.warehouse
+                }
+            });
+            const sanitisedWarehouses = warehouses.filter(warehouse => warehouse.name !== null && warehouse.name.trim() !== "");
 
-        const returns = await getReturns.run();
-        const warehouses = returns.map(p => {
-            return {
-                id: p.warehouse_id,
-                name: p.warehouse
-            }
-        });
-        const sanitisedWarehouses = warehouses.filter(warehouse => warehouse.name !== null && warehouse.name.trim() !== "");
+            const uniqueWarehousesRaw = {};
+            sanitisedWarehouses.forEach(warehouse => {
+                uniqueWarehousesRaw[warehouse.name] = {
+                    id: warehouse.id
+                };
+            });
 
-        if (!returns || returns.length < 1) {
+            const uniqueWarehouses = Object.keys(uniqueWarehousesRaw);
+
+            return uniqueWarehouses.map((name) => {
+                return {
+                    id: uniqueWarehousesRaw[name].id,
+                    name: name,
+                };
+            });
+        } catch (error) {
+            console.error('Error fetching warehouses:', error);
             return [
                 { id: 1, name: 'Jamison Yard' },
                 { id: 2, name: 'Brit Avenue' }
             ];
         }
-
-        const uniqueWarehousesRaw = {};
-
-        for (let i = 0; i < sanitisedWarehouses.length; i++) {
-            uniqueWarehousesRaw[sanitisedWarehouses[i].name] = {
-                id: sanitisedWarehouses[i].id
-            };
-        }
-
-        const uniqueWarehouses = Object.keys(uniqueWarehousesRaw);
-
-        return uniqueWarehouses.map((category) => {
-            return {
-                id: uniqueWarehousesRaw[category].id,
-                name: category,
-            };
-        });
     },
 
     markReceived: async function() {
-        if (this.isTestMode) {
-            console.log('Test mode: Mark as Received');
-            return;
+        try {
+            await markReceived.run();
+            await this.getReturns();
+            closeModal('mdl_returnsDetail');
+            showAlert('Return Order Marked as Received!', 'success');
+        } catch (error) {
+            console.error('Error marking as received:', error);
         }
-
-        await markReceived.run();
-        await this.getReturns();
-        closeModal('mdl_returnsDetail');
-        showAlert('Return Order Marked as Received!', 'success');
     },
 
     handleRefund: async function() {
@@ -138,20 +108,26 @@ export default {
             return showAlert('Select warehouse and payment to continue', 'warning');
         }
 
-        await handleRefund.run();
-        await this.getReturns();
-        closeModal('mdl_returnsDetail');
-        showAlert('Refund Initiated!', 'success');
+        try {
+            await handleRefund.run();
+            await this.getReturns();
+            closeModal('mdl_returnsDetail');
+            showAlert('Refund Initiated!', 'success');
+        } catch (error) {
+            console.error('Error handling refund:', error);
+        }
     },
 
     statusColor: (status) => {
-        if (status === 'Return Initiated' || status === 'Received') {
-            return 'RGB(255, 165, 0)';
+        switch (status) {
+            case 'Return Initiated':
+            case 'Received':
+                return 'RGB(255, 165, 0)';
+            case 'Return Processed':
+                return 'RGB(0, 128, 0)';
+            default:
+                return 'RGB(255, 165, 0)';
         }
-        if (status === 'Return Processed') {
-            return 'RGB(0, 128, 0)';
-        }
-        return 'RGB(255, 165, 0)';
     },
 
     handleResetFilter: async function() {
@@ -210,152 +186,126 @@ export default {
     },
 
     onOrderSelected: async () => {
-        const selectedOrder = tbl_orders.selectedRow;
-        if (!selectedOrder) {
-            console.error('No order selected');
-            return;
+        try {
+            const selectedOrder = tbl_orders.selectedRow;
+            if (!selectedOrder) {
+                console.error('No order selected');
+                return;
+            }
+
+            // Log the selected order for debugging
+            console.log('Selected Order:', selectedOrder);
+            storeValue('order', selectedOrder);
+
+            // Log the stored order for debugging
+            console.log('Stored Order:', appsmith.store.order);
+
+            // Fetch order products and order track details
+            await this.getOrderProducts();
+            await this.getOrderTrack();
+
+            // Reset order products in the store
+            storeValue('orderProducts', null);
+            resetWidget('lst_orderProducts');
+
+            showModal('mdl_orderDetails');
+        } catch (error) {
+            console.error('Error on order selection:', error);
         }
-
-        // Log the selected order for debugging
-        console.log('Selected Order:', selectedOrder);
-        storeValue('order', selectedOrder);
-
-        // Log the stored order for debugging
-        console.log('Stored Order:', appsmith.store.order);
-
-        // Fetch order products and order track details
-        await this.getOrderProducts();
-        await this.getOrderTrack();
-
-        // Reset order products in the store
-        storeValue('orderProducts', null);
-        resetWidget('lst_orderProducts');
-
-        showModal('mdl_orderDetails');
     },
 
     // Function to get order products
     getOrderProducts: async () => {
-        const orderProducts = await getOrderProducts.run();
+        try {
+            const orderProducts = await getOrderProducts.run();
 
-        return orderProducts.map(p => {
-            return {
-                Id: p.id,
-                Name: p.name,
-                SKU: p.sku,
-                Price: p.price,
-                Quantity: p.quantity,
-                Tax: p.taxes,
-                Subtotal: parseInt(p.price) * parseInt(p.quantity),
-                Image: p.image,
-            };
-        });
+            return orderProducts.map(p => {
+                return {
+                    Id: p.id,
+                    Name: p.name,
+                    SKU: p.sku,
+                    Price: p.price,
+                    Quantity: p.quantity,
+                    Tax: p.taxes,
+                    Subtotal: parseInt(p.price) * parseInt(p.quantity),
+                    Image: p.image,
+                };
+            });
+        } catch (error) {
+            console.error('Error fetching order products:', error);
+            return [];
+        }
     },
 
     // Function to get order tracking details
     getOrderTrack: async () => {
-        const orderTrack = await getOrderTrack.run();
+        try {
+            const orderTrack = await getOrderTrack.run();
 
-        return orderTrack.map((o, index) => {
-            return {
-                id: index,
-                Status: o.label,
-                Date: new Date(o.created).toDateString(),
-                Time: new Date(o.created).toLocaleTimeString().slice(0, 5),
-            };
-        });
-    },
-
-    // Function to get carrier data
-    getCarrierData: async () => {
-        const shippingDate = dat_shippingDate.formattedDate || new Date().toISOString();
-
-        const carriers = [
-            {
-                id: 1,
-                name: 'FedEX',
-                shippingRate: 2.5,
-                shippingDate: shippingDate,
-                Eta: new Date(new Date(shippingDate).getTime() + (4 * 24 * 60 * 60 * 1000)).toDateString(),
-            },
-            {
-                id: 2,
-                name: 'DHL',
-                shippingRate: 3,
-                shippingDate: dat_shippingDate.formattedDate,
-                Eta: new Date(new Date(shippingDate).getTime() + (5 * 24 * 60 * 60 * 1000)).toDateString(),
-            },
-            {
-                id: 3,
-                name: 'USPS',
-                shippingRate: 2,
-                shippingDate: dat_shippingDate.formattedDate,
-                Eta: new Date(new Date(shippingDate).getTime() + (6 * 24 * 60 * 60 * 1000)).toDateString(),
-            },
-            {
-                id: 4,
-                name: 'Blue Dart',
-                shippingRate: 3,
-                shippingDate: dat_shippingDate.formattedDate,
-                Eta: new Date(new Date(shippingDate).getTime() + (2 * 24 * 60 * 60 * 1000)).toDateString(),
-            }
-        ];
-
-        const carrierName = sel_carrier.selectedOptionValue;
-
-        const carrier = carriers.filter(c => c.name === carrierName)[0];
-
-        storeValue('carrier', carrier);
-
-        return carrier;
+            return orderTrack.map((o, index) => {
+                return {
+                    id: index,
+                    Status: o.label,
+                    Date: new Date(o.created).toDateString(),
+                    Time: new Date(o.created).toLocaleTimeString().slice(0, 5),
+                };
+            });
+        } catch (error) {
+            console.error('Error fetching order track:', error);
+            return [];
+        }
     },
 
     // Function to update order status
     updateStatus: async (statusId) => {
-        if (!appsmith.store.orderProducts || appsmith.store.orderProducts.length < 1) {
-            return showAlert('Pick products to continue', 'warning');
+        try {
+            if (!appsmith.store.orderProducts || appsmith.store.orderProducts.length < 1) {
+                return showAlert('Pick products to continue', 'warning');
+            }
+
+            await updateOrderStatus.run({
+                statusId,
+            });
+
+            await recordOrderTrack.run({
+                orderStatusId: statusId
+            });
+
+            const orders = await this.getOrders();
+            const order = orders.filter(o => o.Order_id === appsmith.store.order.Order_id);
+
+            storeValue('order', order[0]);
+            showAlert('Order Updated!', 'success');
+        } catch (error) {
+            console.error('Error updating order status:', error);
         }
-
-        await updateOrderStatus.run({
-            statusId,
-        });
-
-        await recordOrderTrack.run({
-            orderStatusId: statusId
-        });
-
-        const orders = await this.getOrders();
-
-        const order = orders.filter(o => o.Order_id === appsmith.store.order.Order_id);
-
-        storeValue('order', order[0]);
-
-        showAlert('Order Updated!', 'success');
     },
 
     // Function to update order shipping details
     updateOrderShipping: async () => {
-        if (!sel_carrier.selectedOptionValue) {
-            return showAlert('Add carrier to continue!', 'warning');
+        try {
+            if (!sel_carrier.selectedOptionValue) {
+                return showAlert('Add carrier to continue!', 'warning');
+            }
+
+            await updateOrderShipping.run();
+
+            await recordOrderTrack.run({
+                orderStatusId: 3
+            });
+
+            await this.getOrders();
+
+            const orders = await this.getOrders();
+            const order = orders.filter(o => o.Order_id === appsmith.store.order.Order_id);
+
+            storeValue('order', order[0]);
+            resetWidget('tbl_orders');
+
+            showAlert('Order Updated!', 'success');
+        } catch (error) {
+            console.error('Error updating order shipping details:', error);
         }
-
-        await updateOrderShipping.run();
-
-        await recordOrderTrack.run({
-            orderStatusId: 3
-        });
-
-        await this.getOrders();
-
-        const orders = await this.getOrders();
-
-        const order = orders.filter(o => o.Order_id === appsmith.store.order.Order_id);
-
-        storeValue('order', order[0]);
-
-        resetWidget('tbl_orders');
-
-        showAlert('Order Updated!', 'success');
     },
 
     // Function to reset filters
@@ -369,15 +319,19 @@ export default {
 
     // Function to initialize the page
     init: async () => {
-        const shippingDate = dat_shippingDate.formattedDate || new Date().toISOString();
-        storeValue('defaultTab', 'Sales Order');
-        storeValue('carrier', {
-            id: 1,
-            name: 'FedEX',
-            shippingRate: 2.5,
-            shippingDate: shippingDate,
-            Eta: new Date(new Date(shippingDate).getTime() + (4 * 24 * 60 * 60 * 1000)).toDateString(),
-        });
+        try {
+            const shippingDate = dat_shippingDate.formattedDate || new Date().toISOString();
+            storeValue('defaultTab', 'Sales Order');
+            storeValue('carrier', {
+                id: 1,
+                name: 'FedEX',
+                shippingRate: 2.5,
+                shippingDate: shippingDate,
+                Eta: new Date(new Date(shippingDate).getTime() + (4 * 24 * 60 * 60 * 1000)).toDateString(),
+            });
+        } catch (error) {
+            console.error('Error initializing page:', error);
+        }
     },
 
     // Function to generate a random label code
@@ -652,6 +606,7 @@ Phone: 988-989-9877`,
         return outputPDF;
     },
 };
+
 
 // ------------------------------------------------------------
 
