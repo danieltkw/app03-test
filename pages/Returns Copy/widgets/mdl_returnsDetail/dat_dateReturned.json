@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 16,
   "boxShadow": "none",
-  "defaultText": "{{tbl_returns.selectedRow ? tbl_returns.selectedRow.dateReturned : ''}}\n",
+  "defaultText": "{{tbl_returns.selectedRow && tbl_returns.selectedRow.dateReturned ? new Date(tbl_returns.selectedRow.dateReturned).toISOString().split('T')[0] : ''}}\n\n",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {

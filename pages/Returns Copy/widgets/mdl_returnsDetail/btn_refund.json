@@ -33,7 +33,7 @@
   "iconSVG": "/static/media/icon.cca026338f1c8eb6df8ba03d084c2fca.svg",
   "isDefaultClickDisabled": true,
   "isDeprecated": false,
-  "isDisabled": "{{tbl_returns.selectedRow ? 'Process Refund' : 'Select a return'}}\n",
+  "isDisabled": "{{!!tbl_returns.selectedRow}}\n",
   "isLoading": false,
   "isVisible": true,
   "key": "xui3zpbyqt",

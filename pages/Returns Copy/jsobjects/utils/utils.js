@@ -78,12 +78,12 @@ export default {
                 OrderID: r.order_id,
                 Product: r.name,
                 Description: r.category,
-                ShippedQty: r.quantity,
-                Quantity: r.returned_quantity,
+                ShippedQty: r.quantity.toString(), // Ensure ShippedQty is a string
+                Quantity: r.returned_quantity.toString(), // Ensure Quantity is a string
                 Amount: r.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
                 ReturnOrderID: 1,
                 WarehouseName: r.label,
-                ReturnedDate: new Date(r.returned_date).toDateString(),
+                ReturnedDate: new Date(r.returned_date).toISOString().split('T')[0], // Ensure ReturnedDate is a string in YYYY-MM-DD format
                 Reason: r.reason,
                 Status: r.status,
                 Warehouse: r.warehouse,
@@ -196,30 +196,22 @@ export default {
 
     // Function to get orders (for future implementation)
     getOrders: async function() {
-				const clientId = utils.getClientId();
-        //const clientId = this.getClientId();
+        const clientId = this.getClientId();
         return await getOrders.run({ clientId: clientId });
     },
 
     // Function to get products (for future implementation)
     getProducts: async function() {
-  			const clientId = utils.getClientId();
-        //const clientId = this.getClientId();
+        const clientId = this.getClientId();
         return await getProducts.run({ clientId: clientId });
     },
 
     // Function to get invoices (for future implementation)
     getInvoices: async function() {
-        const clientId = utils.getClientId();
-				//const clientId = this.getClientId();
+        const clientId = this.getClientId();
         return await getInvoices.run({ clientId: clientId });
     }
 };
-
-
-
-
-// ------------------------------------------------------------
 
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com

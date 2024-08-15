@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 24,
   "boxShadow": "none",
-  "defaultText": "{{tbl_returns.selectedRow ? tbl_returns.selectedRow.shippedQty : ''}}\n\n\n",
+  "defaultText": "{{tbl_returns.selectedRow.quantity.toString()}}\n\n\n\n",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {
