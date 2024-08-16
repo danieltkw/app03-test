@@ -5,6 +5,6 @@ WHERE db_products.product_id IN (
     SELECT JSON_UNQUOTE(JSON_EXTRACT(item, '$.product_id'))
     FROM db_orders
     CROSS JOIN JSON_TABLE(db_orders.items, '$[*]' COLUMNS (item JSON PATH '$')) AS jt
-    WHERE db_orders.user_id = {{clientId}}
+    WHERE db_orders.user_id = {{this.getClientId()}}
 );
 

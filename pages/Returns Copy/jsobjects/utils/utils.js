@@ -54,42 +54,7 @@ export default {
         }
 
         // Replace this with the actual query call to fetch returns
-        const returns = await getReturns.run({ clientId: clientId });
-
-        const fromDate = dat_from.formattedDate || null;
-        const toDate = dat_to.formattedDate || null;
-
-        let filteredReturns = returns;
-
-        // Filter based on date range if fromDate and toDate are provided
-        if (fromDate && toDate) {
-            filteredReturns = returns.filter(k => new Date(k.created) >= new Date(fromDate) && new Date(k.created) <= new Date(toDate));
-        }
-
-        // Filter based on status if sel_status is provided
-        if (sel_status.selectedOptionValue) {
-            filteredReturns = filteredReturns.filter(k => k.status === sel_status.selectedOptionValue);
-        }
-
-        return filteredReturns.map(r => {
-            return {
-                Id: r.id,
-                ID: this.idConverter(r.id),
-                OrderID: r.order_id,
-                Product: r.name,
-                Description: r.category,
-                ShippedQty: r.quantity.toString(), // Ensure ShippedQty is a string
-                Quantity: r.returned_quantity.toString(), // Ensure Quantity is a string
-                Amount: r.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }),
-                ReturnOrderID: 1,
-                WarehouseName: r.label,
-                ReturnedDate: new Date(r.returned_date).toISOString().split('T')[0], // Ensure ReturnedDate is a string in YYYY-MM-DD format
-                Reason: r.reason,
-                Status: r.status,
-                Warehouse: r.warehouse,
-                WarehouseId: r.warehouse_id
-            };
-        }).sort((a, b) => a.id - b.id);
+        return await getReturns.run({ clientId: clientId });
     },
 
     // Function to get warehouses
@@ -102,12 +67,12 @@ export default {
             ];
         }
 
-        const returns = await getReturns.run();
+        const returns = await this.getReturns(); // Ensure clientId is passed properly
         const warehouses = returns.map(p => {
             return {
                 id: p.warehouse_id,
                 name: p.warehouse
-            }
+            };
         });
         const sanitisedWarehouses = warehouses.filter(warehouse => warehouse.name !== null && warehouse.name.trim() !== "");
 
@@ -138,23 +103,36 @@ export default {
 
     // Function to mark received
     markReceived: async function() {
-        const selectedRow = tbl_returns.selectedRow;
-        if (!selectedRow) {
-            console.error('No return selected. Please select a return.');
-            showAlert('Please select a return to proceed.', 'warning');
-            return;
-        }
+    // Check if a return is selected
+    const selectedRow = tbl_returns.selectedRow;
+    if (!selectedRow) {
+        console.error('No return selected. Please select a return.');
+        showAlert('Please select a return to proceed.', 'warning');
+        return;
+    }
 
-        if (this.isTestMode) {
-            console.log('Test mode: Mark as Received');
-            return;
-        }
+    // Check if the application is in test mode
+    if (this.isTestMode) {
+        console.log('Test mode: Mark as Received');
+        showAlert('Test mode: Mark as Received', 'success');
+        return;
+    }
 
-        await markReceived.run();
+    try {
+        // Execute the query to update the return status
+        await markReceived.run({ id: selectedRow.Id });
+        
+        // Refresh the list of returns
         await this.getReturns();
+        
+        // Close the modal and show a success message
         closeModal('mdl_returnsDetail');
         showAlert('Return Order Marked as Received!', 'success');
-    },
+    } catch (error) {
+        console.error('Error marking return as received:', error);
+        showAlert('Failed to mark the return as received. Please try again.', 'error');
+    }
+	},
 
     // Function to handle refund
     handleRefund: async function() {
@@ -169,7 +147,7 @@ export default {
             return;
         }
 
-        await handleRefund.run();
+        await handleRefund.run({ id: selectedRow.Id });
         await this.getReturns();
         closeModal('mdl_returnsDetail');
         showAlert('Refund Initiated!', 'success');
@@ -197,18 +175,30 @@ export default {
     // Function to get orders (for future implementation)
     getOrders: async function() {
         const clientId = this.getClientId();
+        if(!clientId) {
+            console.error('clientId is not defined');
+            return [];
+        }
         return await getOrders.run({ clientId: clientId });
     },
 
     // Function to get products (for future implementation)
     getProducts: async function() {
         const clientId = this.getClientId();
+        if(!clientId) {
+            console.error('clientId is not defined');
+            return [];
+        }
         return await getProducts.run({ clientId: clientId });
     },
 
     // Function to get invoices (for future implementation)
     getInvoices: async function() {
         const clientId = this.getClientId();
+        if(!clientId) {
+            console.error('clientId is not defined');
+            return [];
+        }
         return await getInvoices.run({ clientId: clientId });
     }
 };
@@ -216,5 +206,6 @@ export default {
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
 // ------------------------------------------------------------
+
 
 

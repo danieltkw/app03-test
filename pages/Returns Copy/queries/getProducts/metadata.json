@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- getProducts\nSELECT * \nFROM db_products\nWHERE db_products.product_id IN (\n    SELECT JSON_UNQUOTE(JSON_EXTRACT(item, '$.product_id'))\n    FROM db_orders\n    CROSS JOIN JSON_TABLE(db_orders.items, '$[*]' COLUMNS (item JSON PATH '$')) AS jt\n    WHERE db_orders.user_id = {{clientId}}\n);\n\n",
+      "body": "-- getProducts\nSELECT * \nFROM db_products\nWHERE db_products.product_id IN (\n    SELECT JSON_UNQUOTE(JSON_EXTRACT(item, '$.product_id'))\n    FROM db_orders\n    CROSS JOIN JSON_TABLE(db_orders.items, '$[*]' COLUMNS (item JSON PATH '$')) AS jt\n    WHERE db_orders.user_id = {{this.getClientId()}}\n);\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
