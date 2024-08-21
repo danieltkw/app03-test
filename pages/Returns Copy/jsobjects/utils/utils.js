@@ -1,14 +1,33 @@
 export default {
     isTestMode: true, // Flag to check if we are in test mode
 
+    // Function to fetch and set client ID from the database
+    fetchAndSetClientId: async function() {
+        try {
+            const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
+            if (result && result.length > 0) {
+                const clientId = result[0].client_id;
+                storeValue("clientId", clientId);
+                return clientId;
+            } else {
+                const defaultClientId = 1; // Set this to the desired default client ID
+                storeValue("clientId", defaultClientId);
+                return defaultClientId;
+            }
+        } catch (error) {
+            console.error('Error fetching client ID:', error);
+            const defaultClientId = 1; // Set this to the desired default client ID
+            storeValue("clientId", defaultClientId);
+            return defaultClientId;
+        }
+    },
+
     // Function to get or set default client ID
     getClientId: function() {
         if (appsmith.store.clientId) {
             return appsmith.store.clientId;
         } else {
-            const defaultClientId = 1; // Set this to the desired default client ID
-            storeValue("clientId", defaultClientId);
-            return defaultClientId;
+            return this.fetchAndSetClientId();
         }
     },
 
@@ -25,7 +44,7 @@ export default {
 
     // Function to get returns
     getReturns: async function() {
-        const clientId = this.getClientId();
+        const clientId = await this.getClientId();
         console.clear();
 
         if (this.isTestMode) {
@@ -103,36 +122,36 @@ export default {
 
     // Function to mark received
     markReceived: async function() {
-    // Check if a return is selected
-    const selectedRow = tbl_returns.selectedRow;
-    if (!selectedRow) {
-        console.error('No return selected. Please select a return.');
-        showAlert('Please select a return to proceed.', 'warning');
-        return;
-    }
+        // Check if a return is selected
+        const selectedRow = tbl_returns.selectedRow;
+        if (!selectedRow) {
+            console.error('No return selected. Please select a return.');
+            showAlert('Please select a return to proceed.', 'warning');
+            return;
+        }
 
-    // Check if the application is in test mode
-    if (this.isTestMode) {
-        console.log('Test mode: Mark as Received');
-        showAlert('Test mode: Mark as Received', 'success');
-        return;
-    }
+        // Check if the application is in test mode
+        if (this.isTestMode) {
+            console.log('Test mode: Mark as Received');
+            showAlert('Test mode: Mark as Received', 'success');
+            return;
+        }
 
-    try {
-        // Execute the query to update the return status
-        await markReceived.run({ id: selectedRow.Id });
-        
-        // Refresh the list of returns
-        await this.getReturns();
-        
-        // Close the modal and show a success message
-        closeModal('mdl_returnsDetail');
-        showAlert('Return Order Marked as Received!', 'success');
-    } catch (error) {
-        console.error('Error marking return as received:', error);
-        showAlert('Failed to mark the return as received. Please try again.', 'error');
-    }
-	},
+        try {
+            // Execute the query to update the return status
+            await markReceived.run({ id: selectedRow.Id });
+            
+            // Refresh the list of returns
+            await this.getReturns();
+            
+            // Close the modal and show a success message
+            closeModal('mdl_returnsDetail');
+            showAlert('Return Order Marked as Received!', 'success');
+        } catch (error) {
+            console.error('Error marking return as received:', error);
+            showAlert('Failed to mark the return as received. Please try again.', 'error');
+        }
+    },
 
     // Function to handle refund
     handleRefund: async function() {
@@ -174,7 +193,7 @@ export default {
 
     // Function to get orders (for future implementation)
     getOrders: async function() {
-        const clientId = this.getClientId();
+        const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
@@ -184,7 +203,7 @@ export default {
 
     // Function to get products (for future implementation)
     getProducts: async function() {
-        const clientId = this.getClientId();
+        const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
@@ -194,7 +213,7 @@ export default {
 
     // Function to get invoices (for future implementation)
     getInvoices: async function() {
-        const clientId = this.getClientId();
+        const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
@@ -202,10 +221,14 @@ export default {
         return await getInvoices.run({ clientId: clientId });
     }
 };
+// ------------------------------------------------------------
+
+// Returns Page 
 
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
 // ------------------------------------------------------------
+
 
 
 

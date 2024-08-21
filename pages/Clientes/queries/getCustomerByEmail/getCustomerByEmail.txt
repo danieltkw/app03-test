@@ -1,4 +1,4 @@
--- getCustomerByEmail
+-- getCustomerByEmail - Clients
 SELECT 
     user_id,
     email,

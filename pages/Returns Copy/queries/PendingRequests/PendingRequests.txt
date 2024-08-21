@@ -1,2 +1,2 @@
--- PendingRequests 
+-- PendingRequests - Returns (need to transform in Products)
 SELECT * FROM db_requests WHERE user_id = {{clientId}};

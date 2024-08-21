@@ -1,4 +1,4 @@
--- getCustomerOrders
+-- getCustomerOrders - Clients
 SELECT 
   o.*, 
   os.label AS status_label, 

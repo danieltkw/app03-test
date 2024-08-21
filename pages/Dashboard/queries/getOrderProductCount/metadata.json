@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n  ol.product_variant_id, \n  COUNT(*) as variant_count, \n  pv.product_id,  \n  pv.price,\n  p.name\nFROM order_line ol \nLEFT JOIN product_variant pv ON ol.product_variant_id = pv.id\nLEFT JOIN product p ON pv.product_id = p.id\nGROUP BY ol.product_variant_id, pv.product_id, pv.price, p.name\nORDER BY variant_count DESC\nLIMIT 5;\n\n",
+      "body": "-- getOrderProductCount - Dashboard\nSELECT \n  ol.product_variant_id, \n  COUNT(*) as variant_count, \n  pv.product_id,  \n  pv.price,\n  p.name\nFROM order_line ol \nLEFT JOIN product_variant pv ON ol.product_variant_id = pv.id\nLEFT JOIN product p ON pv.product_id = p.id\nGROUP BY ol.product_variant_id, pv.product_id, pv.price, p.name\nORDER BY variant_count DESC\nLIMIT 5;\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

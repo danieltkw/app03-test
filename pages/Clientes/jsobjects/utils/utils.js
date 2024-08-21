@@ -1,4 +1,41 @@
 export default {
+    // Utility function to fetch and store clientId
+    async fetchAndSetClientId() {
+        try {
+            const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
+            if (result && result.length > 0) {
+                const clientId = result[0].client_id;
+                storeValue("clientId", clientId);
+                return clientId;
+            } else {
+                const defaultClientId = 1; // Set this to the desired default client ID
+                storeValue("clientId", defaultClientId);
+                return defaultClientId;
+            }
+        } catch (error) {
+            console.error('Error fetching client ID:', error);
+            const defaultClientId = 1; // Set this to the desired default client ID
+            storeValue("clientId", defaultClientId);
+            return defaultClientId;
+        }
+    },
+
+    // Function to get or set default client ID
+    async getClientId() {
+        if (appsmith.store.clientId) {
+            return appsmith.store.clientId;
+        } else {
+            return await this.fetchAndSetClientId();
+        }
+    },
+
+    // Function to fetch client details
+    fetchClientDetails: async () => {
+        const clientId = await this.getClientId();
+        const clientDetails = await getClientDetails.run({ clientId });
+        return clientDetails;
+    },
+	
     // Converts numeric IDs to a string with leading zeros and 'C' prefix
     idConverter: (num) => {
         if (num === undefined || num === null) {

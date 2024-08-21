@@ -1,1 +1,2 @@
+-- getReturnsCount - Dashboard 
 SELECT COUNT(*) FROM returns;

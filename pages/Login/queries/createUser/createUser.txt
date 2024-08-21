@@ -1,5 +1,6 @@
 # // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
 # // ------------------------------------------------------------
+# createUser - Login
 
 INSERT INTO `public_user_auth` (`first_name`, `last_name`, `email`, `username`, `password_hash`, `last_login`, `role`, `created`, `updated`)
 VALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', NOW(), 'Admin', NOW(), NOW())

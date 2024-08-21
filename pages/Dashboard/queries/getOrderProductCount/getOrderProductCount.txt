@@ -1,3 +1,4 @@
+-- getOrderProductCount - Dashboard
 SELECT 
   ol.product_variant_id, 
   COUNT(*) as variant_count, 

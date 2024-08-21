@@ -1,2 +1,2 @@
--- returns
+-- returns - Returns (need to transform in Products) 
 SELECT * FROM db_returns;

@@ -1,3 +1,4 @@
+-- getRevenueByMonth - Dashboard
 SELECT
   DATE_FORMAT(created, '%Y-%m') AS month,
   SUM(total) AS total

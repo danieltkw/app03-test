@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- getCustomerOrders\nSELECT \n  o.*, \n  os.label AS status_label, \n  (SELECT COUNT(*) FROM order_line WHERE order_line.order_id = o.order_id) AS order_line_count\nFROM db_orders o\nINNER JOIN order_status os ON o.order_status_id = os.id \nWHERE o.user_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.CustomerID : 0}}';\n\n\n\n\n",
+      "body": "-- getCustomerOrders - Clients\nSELECT \n  o.*, \n  os.label AS status_label, \n  (SELECT COUNT(*) FROM order_line WHERE order_line.order_id = o.order_id) AS order_line_count\nFROM db_orders o\nINNER JOIN order_status os ON o.order_status_id = os.id \nWHERE o.user_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.CustomerID : 0}}';\n\n\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

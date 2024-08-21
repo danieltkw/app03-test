@@ -1,6 +1,44 @@
 export default {
-    // Flag to check if we are in test mode
+	  // Flag to check if we are in test mode
     isTestMode: true,
+	
+    // Utility function to fetch and store clientId
+    async fetchAndSetClientId() {
+        try {
+            const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
+            if (result && result.length > 0) {
+                const clientId = result[0].client_id;
+                storeValue("clientId", clientId);
+                return clientId;
+            } else {
+                const defaultClientId = 1; // Set this to the desired default client ID
+                storeValue("clientId", defaultClientId);
+                return defaultClientId;
+            }
+        } catch (error) {
+            console.error('Error fetching client ID:', error);
+            const defaultClientId = 1; // Set this to the desired default client ID
+            storeValue("clientId", defaultClientId);
+            return defaultClientId;
+        }
+    },
+
+    // Function to get or set default client ID
+    async getClientId() {
+        if (appsmith.store.clientId) {
+            return appsmith.store.clientId;
+        } else {
+            return await this.fetchAndSetClientId();
+        }
+    },
+
+    // Function to fetch product details
+    fetchProductDetails: async () => {
+        const clientId = await this.getClientId();
+        const productDetails = await getProductDetails.run({ clientId });
+        return productDetails;
+    },
+	
 
     // Function to convert ID to a formatted string with a 'P' prefix
     idConverter: (num) => {
@@ -18,8 +56,9 @@ export default {
         console.clear();
 
         try {
+            const clientId = await getClientId();
             // Fetch products using the configured query
-            const products = await getProducts.run(); 
+            const products = await getProducts.run({ clientId }); 
 
             // Get selected category filter
             const categoryFilter = sel_category.selectedOptionValue;
@@ -52,7 +91,8 @@ export default {
     // Function to fetch unique categories from the products
     getCategories: async function () {
         try {
-            const products = await getProducts.run(); 
+            const clientId = await getClientId();
+            const products = await getProducts.run({ clientId }); 
 
             // Extract and sanitize categories
             const categories = products.map(p => p.category).filter(c => c !== null && c.trim() !== "");
@@ -73,6 +113,8 @@ export default {
 
 
 // // ------------------------------------------------------------
+
+// Products 
 
 // // ------------------------------------------------------------
 // // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com

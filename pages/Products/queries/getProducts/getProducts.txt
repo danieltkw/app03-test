@@ -1,3 +1,4 @@
+-- getProducts - Products
 SELECT 
   p.product_id AS id,
   p.name AS name,

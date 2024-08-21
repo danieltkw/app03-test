@@ -1,5 +1,0 @@
--- Update order status
-UPDATE `order`
-SET order_status_id = {{this.params.statusId}}
-WHERE id = {{ appsmith.store.order.Order_id }};
-

@@ -1,4 +1,4 @@
--- getCustomers
+-- getCustomers - Clients 
 SELECT 
   clients.*, 
   person.first_name, 

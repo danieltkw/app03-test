@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- getReturns\nSELECT * FROM returns WHERE client_id = {{clientId}};\n\n",
+      "body": "-- getReturns - Returns (need to transform in Products) \nSELECT * FROM returns WHERE client_id = {{clientId}};\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
