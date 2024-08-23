@@ -4,7 +4,7 @@ export default {
         try {
             const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
             if (result && result.length > 0) {
-                const clientId = result[0].client_id;
+                const clientId = result[0].client_id; // Adjust the column name based on the table structure
                 storeValue("clientId", clientId);
                 return clientId;
             } else {
@@ -31,7 +31,7 @@ export default {
 
     // Function to generate an invoice PDF
     generateInvoice: async () => {
-        const doc = new jspdf();
+        const doc = new jspdf.jsPDF();
         doc.text("Hello, World!", 10, 10);
         doc.save("example.pdf");
     },
@@ -65,7 +65,7 @@ export default {
 
     // Function to fetch and format data for the top ordered products chart
     topOrderedProductsChart: async () => {
-        const clientId = await getClientId();
+        const clientId = await this.getClientId();
         const orderedProductsCount = await getOrderProductCount.run({ clientId });
 
         return orderedProductsCount.map(p => {
@@ -79,7 +79,7 @@ export default {
     // Function to fetch and format data for the revenue chart
     revenueChart: async () => {
         try {
-            const clientId = await getClientId();
+            const clientId = await this.getClientId();
             const revenueByMonth = await getRevenueByMonth.run({ clientId });
 
             const months = [
@@ -101,7 +101,7 @@ export default {
 
     // Function to calculate the average fulfillment time
     calculateAvFulfilTIme: async () => {
-        const clientId = await getClientId();
+        const clientId = await this.getClientId();
         const data = await getReturns.run({ clientId });
 
         const orders = {};
@@ -146,6 +146,7 @@ export default {
         return overallAvg ? overallAvg.toFixed(2) : 1.2;
     }
 };
+
 
 // ------------------------------------------------------------
 

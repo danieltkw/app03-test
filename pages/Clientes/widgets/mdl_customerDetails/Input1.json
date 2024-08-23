@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 39,
   "boxShadow": "none",
-  "defaultText": "{{tbl_customers.selectedRow ? tbl_customers.selectedRow.vat : '' }}",
+  "defaultText": "{{ tbl_customers.selectedRow ? String(tbl_customers.selectedRow.vat) : '' }}",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {
@@ -26,7 +26,7 @@
   "hideCard": false,
   "iconAlign": "left",
   "iconSVG": "/static/media/icon.e082ea210dbe0f5ca1bf7bfd67abdbec.svg",
-  "inputType": "TEXT",
+  "inputType": "NUMBER",
   "isDeprecated": false,
   "isDisabled": false,
   "isLoading": false,
@@ -59,6 +59,7 @@
   "parentColumnSpace": 14.875,
   "parentId": "egj9nhnqcw",
   "parentRowSpace": 10,
+  "regex": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
   "renderMode": "CANVAS",
   "resetOnSubmit": true,
   "responsiveBehavior": "fill",
@@ -69,6 +70,7 @@
     "number",
     "textarea"
   ],
+  "shouldAllowAutofill": false,
   "showStepArrows": false,
   "tags": [
     "Suggested",
@@ -77,7 +79,7 @@
   "thumbnailSVG": "https://appcdn.appsmith.com/static/media/thumbnail.a4eac1a16753ea7fc54cac7731f9ea6a.svg",
   "topRow": 32,
   "type": "INPUT_WIDGET_V2",
-  "validation": "{{ Input1.text.length === 9 && /^[0-9]+$/.test(Input1.text) }}\n",
+  "validation": "{{ Input1.text ? String(Input1.text) : '' }}",
   "version": 2,
   "widgetId": "pxww57g1ew",
   "widgetName": "Input1"

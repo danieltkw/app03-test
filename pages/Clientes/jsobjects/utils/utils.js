@@ -30,7 +30,7 @@ export default {
     },
 
     // Function to fetch client details
-    fetchClientDetails: async () => {
+    async fetchClientDetails() {
         const clientId = await this.getClientId();
         const clientDetails = await getClientDetails.run({ clientId });
         return clientDetails;
@@ -63,7 +63,7 @@ export default {
                     Email: c.email,
                     BillingAddress: c.billing_address || '',  // Fallback to empty string if undefined
                     ShippingAddress: c.shipping_address || '', // Fallback to empty string if undefined
-                    vat: c.vat_number
+                    vat: String(c.vat_number) // Ensure vat is a string
                 };
             });
         } catch (error) {
@@ -170,10 +170,12 @@ export default {
             Email: customer.email,
             BillingAddress: customer.billing_address,
             ShippingAddress: customer.shipping_address,
-            vat: customer.vat_number
+            vat: String(customer.vat_number) // Ensure vat is a string
         };
     }
 };
+
+
 
 
 /*

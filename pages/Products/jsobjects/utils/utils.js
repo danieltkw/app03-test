@@ -1,11 +1,35 @@
 export default {
-	  // Flag to check if we are in test mode
+    // Flag to check if we are in test mode
     isTestMode: true,
-	
+    
+    // Simulated function to fetch client ID from the database
+    async getClientIdFromDB() {
+        // Simulate a database call
+        return [{ client_id: 1 }];
+    },
+
+    // Simulated function to fetch product details based on client ID
+    async getProductDetails({ clientId }) {
+        // Simulate fetching product details
+        return [
+            {
+                id: 1,
+                name: "Product 1",
+                category: "Category 1",
+                description: "Description 1",
+                location: "Location 1",
+                price: 100,
+                sku: "SKU1",
+                total_stock: 10
+            },
+            // Add more product details as needed
+        ];
+    },
+
     // Utility function to fetch and store clientId
     async fetchAndSetClientId() {
         try {
-            const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
+            const result = await this.getClientIdFromDB(); // Replace with the actual query to fetch client ID
             if (result && result.length > 0) {
                 const clientId = result[0].client_id;
                 storeValue("clientId", clientId);
@@ -35,11 +59,10 @@ export default {
     // Function to fetch product details
     fetchProductDetails: async () => {
         const clientId = await this.getClientId();
-        const productDetails = await getProductDetails.run({ clientId });
+        const productDetails = await this.getProductDetails({ clientId });
         return productDetails;
     },
-	
-
+    
     // Function to convert ID to a formatted string with a 'P' prefix
     idConverter: (num) => {
         if (num === undefined || num === null) {
@@ -56,7 +79,7 @@ export default {
         console.clear();
 
         try {
-            const clientId = await getClientId();
+            const clientId = await this.getClientId();
             // Fetch products using the configured query
             const products = await getProducts.run({ clientId }); 
 
@@ -90,24 +113,26 @@ export default {
 
     // Function to fetch unique categories from the products
     getCategories: async function () {
-        try {
-            const clientId = await getClientId();
-            const products = await getProducts.run({ clientId }); 
+						try {
+						const clientId = await this.getClientId();
+						const products = await getProducts.run({ clientId }); 
 
-            // Extract and sanitize categories
-            const categories = products.map(p => p.category).filter(c => c !== null && c.trim() !== "");
-            const uniqueCategories = [...new Set(categories)];
+						// Extract and sanitize categories
+						const categories = products.map(p => p.category).filter(c => c !== null && c.trim() !== "");
+						const uniqueCategories = [...new Set(categories)];
 
-            // Return the categories with both label and value keys
-            return uniqueCategories.map(category => ({
-                label: category,
-                value: category   
-            }));
+						// Create the categories array with label and value keys
+						const categoriesArray = uniqueCategories.map(category => ({
+								label: category,
+								value: category   
+						}));
 
-        } catch (error) {
-            console.error('Error in getCategories:', error);
-            return [];
-        }
+						return categoriesArray;
+
+				} catch (error) {
+						console.error('Error in getCategories:', error);
+						return [];
+				}
     },
 };
 

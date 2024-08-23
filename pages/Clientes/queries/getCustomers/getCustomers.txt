@@ -1,19 +1,12 @@
 -- getCustomers - Clients 
 SELECT 
-  clients.*, 
-  person.first_name, 
-  person.last_name, 
-  person.email, 
-  person.phone, 
-  location.address1, 
-  location.city, 
-  location.state, 
-  location.country, 
-  location.postal_code, 
-  location.vat 
-FROM clients
-LEFT JOIN person ON clients.id = person.id
-LEFT JOIN location ON person.id = location.person
+  user_id, 
+  first_name, 
+  last_name, 
+  email, 
+  phone, 
+  vat_number
+FROM db_users
 LIMIT {{tbl_customers.pageSize}} OFFSET {{(tbl_customers.pageNo - 1) * tbl_customers.pageSize}};
 
 

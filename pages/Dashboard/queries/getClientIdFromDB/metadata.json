@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_f92faf8a-5752-414e-b8c6-bb37c47f0da7",
-  "id": "Clientes_getCustomerOrders",
+  "gitSyncId": "66b91aa416e9244321599197_4a3aeba6-ed64-4418-88df-0689c9e41963",
+  "id": "Dashboard_getClientIdFromDB",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "-- getCustomerOrders - Clients\nSELECT \n  o.order_id, \n  o.created, \n  JSON_LENGTH(o.items) AS items_count, \n  o.total, \n  o.delivery_status\nFROM db_orders o\nWHERE o.user_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.user_id : 0}}';\n\n\n\n\n",
+      "body": "-- getClientIdFromDB - Fetch client ID from the db_users table\nSELECT client_id FROM db_users WHERE user_id = {{appsmith.user.id}};",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -27,9 +27,9 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": true,
-    "name": "getCustomerOrders",
-    "pageId": "Clientes",
+    "executeOnLoad": false,
+    "name": "getClientIdFromDB",
+    "pageId": "Dashboard",
     "userSetOnLoad": false
   }
 }

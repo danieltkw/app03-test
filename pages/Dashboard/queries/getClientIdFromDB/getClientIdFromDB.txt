@@ -1,0 +1,2 @@
+-- getClientIdFromDB - Fetch client ID from the db_users table
+SELECT client_id FROM db_users WHERE user_id = {{appsmith.user.id}};

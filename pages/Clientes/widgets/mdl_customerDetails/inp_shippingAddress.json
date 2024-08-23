@@ -5,7 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "bottomRow": 31,
   "boxShadow": "none",
-  "defaultText": "{{ tbl_customers.selectedRow ? tbl_customers.selectedRow.ShippingAddress : '' }}",
+  "defaultText": "{{ tbl_customers.selectedRow ? String(tbl_customers.selectedRow.ShippingAddress) : '' }}\n",
   "displayName": "Input",
   "dynamicBindingPathList": [
     {

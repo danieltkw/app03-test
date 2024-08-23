@@ -1,11 +1,12 @@
 -- getCustomerOrders - Clients
 SELECT 
-  o.*, 
-  os.label AS status_label, 
-  (SELECT COUNT(*) FROM order_line WHERE order_line.order_id = o.order_id) AS order_line_count
+  o.order_id, 
+  o.created, 
+  JSON_LENGTH(o.items) AS items_count, 
+  o.total, 
+  o.delivery_status
 FROM db_orders o
-INNER JOIN order_status os ON o.order_status_id = os.id 
-WHERE o.user_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.CustomerID : 0}}';
+WHERE o.user_id = '{{tbl_customers.selectedRow ? tbl_customers.selectedRow.user_id : 0}}';
 
 
 

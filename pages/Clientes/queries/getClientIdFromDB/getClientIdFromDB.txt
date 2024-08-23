@@ -1,0 +1,2 @@
+-- getClientIdFromDB - Clients
+SELECT client_id FROM db_users WHERE email = '{{appsmith.user.email}}';
