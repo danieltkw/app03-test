@@ -114,25 +114,27 @@ export default {
     // Function to fetch unique categories from the products
     getCategories: async function () {
 						try {
-						const clientId = await this.getClientId();
-						const products = await getProducts.run({ clientId }); 
+										const clientId = await this.getClientId();
+										const products = await getProducts.run({ clientId }); 
 
-						// Extract and sanitize categories
-						const categories = products.map(p => p.category).filter(c => c !== null && c.trim() !== "");
-						const uniqueCategories = [...new Set(categories)];
+										// Extract and sanitize categories
+										const categories = products.map(p => p.category).filter(c => c !== null && c.trim() !== "");
+										const uniqueCategories = [...new Set(categories)];
 
-						// Create the categories array with label and value keys
-						const categoriesArray = uniqueCategories.map(category => ({
-								label: category,
-								value: category   
-						}));
+										// Create the categories array with label and value keys
+										const categoriesArray = uniqueCategories.map(category => ({
+												label: category,
+												value: category   
+										}));
 
-						return categoriesArray;
+										console.log('Categories Array:', categoriesArray); // Add this line to debug
 
-				} catch (error) {
-						console.error('Error in getCategories:', error);
-						return [];
-				}
+										return categoriesArray;
+
+								} catch (error) {
+										console.error('Error in getCategories:', error);
+										return [];
+								}
     },
 };
 

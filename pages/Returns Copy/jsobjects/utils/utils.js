@@ -23,11 +23,11 @@ export default {
     },
 
     // Function to get or set default client ID
-    getClientId: function() {
+    getClientId: async function() {
         if (appsmith.store.clientId) {
             return appsmith.store.clientId;
         } else {
-            return this.fetchAndSetClientId();
+            return await this.fetchAndSetClientId();
         }
     },
 
@@ -221,9 +221,10 @@ export default {
         return await getInvoices.run({ clientId: clientId });
     }
 };
+
 // ------------------------------------------------------------
 
-// Returns Page 
+// Products Page 
 
 // ------------------------------------------------------------
 // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
