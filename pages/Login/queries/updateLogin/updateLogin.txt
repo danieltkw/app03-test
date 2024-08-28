@@ -2,7 +2,11 @@
 # // ------------------------------------------------------------
 -- updateLogin
 
-UPDATE `public_user_auth`
-SET `last_login` = '{{ new Date().toISOString() }}'
-WHERE `id` = '{{ this.params.id }}';
+UPDATE `db_users`
+SET `updated_at` = '{{ new Date().toISOString().slice(0, 19).replace("T", " ") }}'
+WHERE `user_id` = '{{this.params.userId}}';
+
+
+
 # // ------------------------------------------------------------
+

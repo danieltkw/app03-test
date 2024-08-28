@@ -3,7 +3,9 @@
 # // SQL query to select all fields from the public_asset_user table where the email matches the input email
 -- findUserByEmail - Login 
 
-SELECT * FROM `public_user_auth`.`email`;
+SELECT * FROM `db_users` WHERE `email` = '{{inp_email.text || "test@example.com"}}';
+
+
 # // ------------------------------------------------------------
 
 

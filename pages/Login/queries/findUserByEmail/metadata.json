@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\n# // SQL query to select all fields from the public_asset_user table where the email matches the input email\n-- findUserByEmail - Login \n\nSELECT * FROM `public_user_auth`.`email`;\n# // ------------------------------------------------------------\n\n\n\n",
+      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\n# // SQL query to select all fields from the public_asset_user table where the email matches the input email\n-- findUserByEmail - Login \n\nSELECT * FROM `db_users` WHERE `email` = '{{inp_email.text || \"test@example.com\"}}';\n\n\n# // ------------------------------------------------------------\n\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -22,7 +22,11 @@
       "name": "appsmith_dba",
       "pluginId": "mysql-plugin"
     },
-    "dynamicBindingPathList": [],
+    "dynamicBindingPathList": [
+      {
+        "key": "body"
+      }
+    ],
     "executeOnLoad": false,
     "name": "findUserByEmail",
     "pageId": "Login",

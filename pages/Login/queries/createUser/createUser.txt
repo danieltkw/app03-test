@@ -2,7 +2,9 @@
 # // ------------------------------------------------------------
 # createUser - Login
 
-INSERT INTO `public_user_auth` (`first_name`, `last_name`, `email`, `username`, `password_hash`, `last_login`, `role`, `created`, `updated`)
-VALUES ('{{inp_firstName.text}}', '{{inp_lastName.text}}', '{{inp_registerEmail.text}}', '{{inp_registerEmail.text}}', '{{this.params.passwordHash}}', NOW(), 'Admin', NOW(), NOW());
+INSERT INTO `db_users` (`first_name`, `last_name`, `email`, `password_hash`, `role`, `created_at`, `updated_at`)
+VALUES ('{{inp_firstName.text || "TestFirstName"}}', '{{inp_lastName.text || "TestLastName"}}', '{{inp_registerEmail.text || this.generateRandomEmail()}}', '{{this.generatePasswordHash()}}', 'client', NOW(), NOW());
+
+
 
 # // ------------------------------------------------------------

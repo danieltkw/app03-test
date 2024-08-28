@@ -1,10 +1,20 @@
 export default {
-  defaultTab: 'Sign In',
+  defaultTab: 'Sign In', // Ensure this matches one of the tab names
   testMode: true,
 
   // Function to set the default tab
   setDefaultTab(newTab) {
-    this.defaultTab = newTab;
+    if (newTab === 'Sign In' || newTab === 'Sign Up') {
+      this.defaultTab = newTab;
+    } else {
+      console.error('Invalid tab name:', newTab);
+    }
+  },
+
+  // Function to initialize the component
+  initialize() {
+    console.log('Initializing with defaultTab:', this.defaultTab);
+    this.setDefaultTab(this.defaultTab);
   },
 
   // Function to generate a random value (used in test mode)
@@ -13,7 +23,7 @@ export default {
   },
 
   // Function to generate a hashed password
-  generatePasswordHash() {
+  async generatePasswordHash() {
     const password = inp_registerPassword.text || this.generateRandomValue();
     if (!inp_registerPassword.text) {
       showAlert('No password entered, using random test value: ' + password, 'warning');
@@ -33,78 +43,106 @@ export default {
 
   // Function to create a token (dummy function for test mode)
   async createToken(user) {
+    if (!user || !user.email) {
+      throw new Error("User object is undefined or missing email.");
+    }
     return 'dummy-token-for-' + user.email;
   },
 
   // Function to handle user sign-in
   async signIn() {
     const password = inp_password.text || 'testpassword';
-
-    // Fallback to test values if in test mode and inputs are empty
     const email = inp_email.text || 'test@example.com';
+
     if (this.testMode && !inp_email.text) {
       showAlert('Test mode is on. Using default test email for sign-in.', 'warning');
     }
 
-    const user = await findUserByEmail.run({ email });
+    try {
+      const user = await this.findUserByEmail(email);
 
-    if (user && dcodeIO.bcrypt.compareSync(password, user.password_hash)) {
-      await storeValue('token', await this.createToken(user));
-      await updateLogin.run({ id: user.id });
-      showAlert('Login Success', 'success');
-    } else {
-      showAlert('Invalid email/password combination', 'error');
+      if (user && user.length > 0 && dcodeIO.bcrypt.compareSync(password, user[0].password_hash)) {
+        await storeValue('token', await this.createToken(user[0]));
+        await this.updateLogin(user[0].user_id);
+        showAlert('Login Success', 'success');
+      } else {
+        showAlert('Invalid email/password combination', 'error');
+      }
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+      showAlert('An error occurred during sign-in', 'error');
     }
   },
 
-			// Function to handle user registration
-			async register() {
-			const passwordHash = await this.generatePasswordHash();
+  // Function to handle user registration
+  async register() {
+    const passwordHash = await this.generatePasswordHash();
 
-			// Fallback to test values if in test mode and inputs are empty
-			const first_name = inp_firstName.text || 'TestFirstName';
-			const last_name = inp_lastName.text || 'TestLastName';
-			const email = inp_registerEmail.text || this.generateRandomEmail();
-			// Use email as username
-			const username = email;
+    // Fallback to test values if in test mode and inputs are empty
+    const first_name = inp_firstName.text || 'TestFirstName';
+    const last_name = inp_lastName.text || 'TestLastName';
+    const email = inp_registerEmail.text || this.generateRandomEmail();
 
-			if (this.testMode) {
-					showAlert('Test mode is on. Using default test values for registration.', 'warning');
-			}
+    if (this.testMode) {
+      showAlert('Test mode is on. Using default test values for registration.', 'warning');
+    }
 
-			// Create the payload object
-			const payload = {
-					first_name,
-					last_name,
-					email,
-					username,
-					password_hash: passwordHash,
-					last_login: new Date().toISOString().slice(0, 19).replace('T', ' '),
-					role: 'user',
-					created: new Date().toISOString().slice(0, 19).replace('T', ' '),
-					updated: new Date().toISOString().slice(0, 19).replace('T', ' ')
-			};
+    try {
+      // Execute the query using your database client
+      const userInsertResult = await this.createUser({
+        first_name,
+        last_name,
+        email,
+        passwordHash,
+      });
 
-			// Insert the user into the database
-			const query = `
-					INSERT INTO public_user_auth 
-							(first_name, last_name, email, username, password_hash, last_login, role, created, updated)
-					VALUES
-							('${payload.first_name}', '${payload.last_name}', '${payload.email}', '${payload.username}', 
-							 '${payload.password_hash}', '${payload.last_login}', '${payload.role}', '${payload.created}', '${payload.updated}');
-			`;
+      if (userInsertResult) {
+        storeValue('token', await this.createToken({ email: email }));
+        showAlert('Register Success', 'success');
+      } else {
+        showAlert('Error creating new user', 'error');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      showAlert('An error occurred during registration', 'error');
+    }
+  },
 
-			const userInsertResult = await createUser.run({ query });
+  // Function to update last login
+  async updateLogin(userId) {
+    try {
+      await updateLogin.run({
+        id: userId,
+        updated_at: new Date().toISOString().slice(0, 19).replace("T", " ")
+      });
+    } catch (error) {
+      console.error('Error during updateLogin:', error);
+      showAlert('An error occurred while updating login time', 'error');
+    }
+  },
 
-			if (userInsertResult) {
-					// Optionally, you could use the same payload to store the user data
-					storeValue('token', await this.createToken(payload)); // Note: using payload instead of fetched user
-					showAlert('Register Success', 'success');
-			} else {
-					showAlert('Error creating new user', 'error');
-			}
-	}
+  // Function to find user by email
+  async findUserByEmail(email) {
+    try {
+      return await findUserByEmail.run({ email });
+    } catch (error) {
+      console.error('Error during findUserByEmail:', error);
+      showAlert('An error occurred while fetching user', 'error');
+    }
+  },
+
+  // Function to create a new user
+  async createUser(payload) {
+    try {
+      return await createUser.run(payload);
+    } catch (error) {
+      console.error('Error during createUser:', error);
+      showAlert('An error occurred while creating user', 'error');
+    }
+  },
 };
+
+
 
 
 // ------------------------------------------------------------

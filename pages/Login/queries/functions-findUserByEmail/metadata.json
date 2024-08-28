@@ -1,16 +1,12 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_5dc95025-8390-486a-93d4-334a45f82915",
-  "id": "Login_functions.createToken",
+  "gitSyncId": "66b91aa416e9244321599197_960ab6e0-b24a-4627-9beb-486f9f2c6b00",
+  "id": "Login_functions.findUserByEmail",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [
-        {
-          "name": "user"
-        }
-      ],
+      "jsArguments": [],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },
@@ -27,8 +23,8 @@
       }
     ],
     "executeOnLoad": false,
-    "fullyQualifiedName": "functions.createToken",
-    "name": "createToken",
+    "fullyQualifiedName": "functions.findUserByEmail",
+    "name": "findUserByEmail",
     "pageId": "Login",
     "userSetOnLoad": false
   }

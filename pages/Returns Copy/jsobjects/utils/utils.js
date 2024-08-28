@@ -4,19 +4,14 @@ export default {
     // Function to fetch and set client ID from the database
     fetchAndSetClientId: async function() {
         try {
-            const result = await getClientIdFromDB.run(); // Replace with the actual query to fetch client ID
-            if (result && result.length > 0) {
-                const clientId = result[0].client_id;
-                storeValue("clientId", clientId);
-                return clientId;
-            } else {
-                const defaultClientId = 1; // Set this to the desired default client ID
-                storeValue("clientId", defaultClientId);
-                return defaultClientId;
-            }
+            // Since getClientIdFromDB is not defined, we'll use a default value
+            // Replace this with actual database query when available
+            const defaultClientId = 1;
+            storeValue("clientId", defaultClientId);
+            return defaultClientId;
         } catch (error) {
             console.error('Error fetching client ID:', error);
-            const defaultClientId = 1; // Set this to the desired default client ID
+            const defaultClientId = 1;
             storeValue("clientId", defaultClientId);
             return defaultClientId;
         }
@@ -86,7 +81,7 @@ export default {
             ];
         }
 
-        const returns = await this.getReturns(); // Ensure clientId is passed properly
+        const returns = await this.getReturns();
         const warehouses = returns.map(p => {
             return {
                 id: p.warehouse_id,
@@ -191,34 +186,47 @@ export default {
         return 'RGB(255, 165, 0)';
     },
 
-    // Function to get orders (for future implementation)
+    // Function to get orders
     getOrders: async function() {
         const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
         }
-        return await getOrders.run({ clientId: clientId });
+        // Make sure you have a query named 'getOrders' defined in Appsmith
+        return await getOrders.run();
     },
 
-    // Function to get products (for future implementation)
+    // Function to get products
     getProducts: async function() {
         const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
         }
-        return await getProducts.run({ clientId: clientId });
+        // Make sure you have a query named 'getProducts' defined in Appsmith
+        return await getProducts.run();
     },
 
-    // Function to get invoices (for future implementation)
+    // Function to get invoices
     getInvoices: async function() {
         const clientId = await this.getClientId();
         if(!clientId) {
             console.error('clientId is not defined');
             return [];
         }
-        return await getInvoices.run({ clientId: clientId });
+        // Make sure you have a query named 'getInvoices' defined in Appsmith
+        return await getInvoices.run();
+    },
+
+    // Function to handle page load
+    onPageLoad: async function() {
+        await this.getClientId();
+        await this.getProducts();
+        await this.getOrders();
+        await this.getInvoices();
+        await this.getReturns();
+        await this.getWarehouses();
     }
 };
 

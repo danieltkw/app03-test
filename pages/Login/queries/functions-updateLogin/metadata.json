@@ -1,12 +1,16 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_3d83a555-2e2d-4524-bef5-4ac483a8e937",
-  "id": "Login_functions.generateRandomVAT",
+  "gitSyncId": "66b91aa416e9244321599197_02aac24d-8318-4cab-aa09-1ee20e97fef5",
+  "id": "Login_functions.updateLogin",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [],
+      "jsArguments": [
+        {
+          "name": "userId"
+        }
+      ],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },
@@ -23,8 +27,8 @@
       }
     ],
     "executeOnLoad": false,
-    "fullyQualifiedName": "functions.generateRandomVAT",
-    "name": "generateRandomVAT",
+    "fullyQualifiedName": "functions.updateLogin",
+    "name": "updateLogin",
     "pageId": "Login",
     "userSetOnLoad": false
   }
