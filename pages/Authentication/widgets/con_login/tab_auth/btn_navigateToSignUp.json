@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 52,
+  "bottomRow": 51,
   "boxShadow": "none",
   "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
   "buttonVariant": "TERTIARY",
@@ -33,7 +33,7 @@
   "isLoading": false,
   "isVisible": true,
   "key": "w5le6pkfax",
-  "leftColumn": 1,
+  "leftColumn": 2,
   "minWidth": 120,
   "mobileBottomRow": 95,
   "mobileLeftColumn": 41,
@@ -50,7 +50,7 @@
   "renderMode": "CANVAS",
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
-  "rightColumn": 60,
+  "rightColumn": 58,
   "searchTags": [
     "click",
     "submit"
@@ -59,7 +59,7 @@
     "Buttons"
   ],
   "text": "Sem cadastro? Registre-se",
-  "topRow": 48,
+  "topRow": 47,
   "type": "BUTTON_WIDGET",
   "version": 1,
   "widgetId": "6mx5oq7on0",

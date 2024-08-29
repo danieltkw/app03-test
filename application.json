@@ -26,6 +26,10 @@
   "icon": "calender",
   "pages": [
     {
+      "id": "Authentication",
+      "isDefault": false
+    },
+    {
       "id": "Dashboard",
       "isDefault": false
     },

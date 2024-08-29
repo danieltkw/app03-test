@@ -1,7 +1,7 @@
 {
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 52,
+  "bottomRow": 61,
   "boxShadow": "none",
   "buttonColor": "{{appsmith.theme.colors.primaryColor}}",
   "buttonVariant": "TERTIARY",
@@ -33,24 +33,24 @@
   "isLoading": false,
   "isVisible": true,
   "key": "w5le6pkfax",
-  "leftColumn": 1,
+  "leftColumn": 14,
   "minWidth": 120,
   "mobileBottomRow": 95,
   "mobileLeftColumn": 41,
   "mobileRightColumn": 57,
   "mobileTopRow": 91,
-  "onClick": "{{functions.setDefaultTab('Sign Up')}}",
-  "originalBottomRow": 52,
-  "originalTopRow": 48,
+  "onClick": "{{functions.setDefaultTab('Sign In')}}",
+  "originalBottomRow": 61,
+  "originalTopRow": 57,
   "parentColumnSpace": 19.8125,
-  "parentId": "8rq3ao3yqz",
+  "parentId": "f5yn1hxqze",
   "parentRowSpace": 10,
   "placement": "CENTER",
   "recaptchaType": "V3",
   "renderMode": "CANVAS",
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
-  "rightColumn": 60,
+  "rightColumn": 50,
   "searchTags": [
     "click",
     "submit"
@@ -58,10 +58,10 @@
   "tags": [
     "Buttons"
   ],
-  "text": "Sem cadastro? Registre-se",
-  "topRow": 48,
+  "text": "Registrado? Realize login",
+  "topRow": 57,
   "type": "BUTTON_WIDGET",
   "version": 1,
-  "widgetId": "6mx5oq7on0",
-  "widgetName": "btn_navigateToSignUp"
+  "widgetId": "at7txr50lc",
+  "widgetName": "btn_navigateToSignIn"
 }

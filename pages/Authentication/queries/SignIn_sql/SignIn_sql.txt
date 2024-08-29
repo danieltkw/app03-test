@@ -1,0 +1,8 @@
+-- SignIn_sql - Login 
+
+SELECT * FROM db_users 
+WHERE email = '{{inp_email.text}}';
+
+
+-- # // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
+
