@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_ea9b2b8c-327e-46ec-84b4-c4dd182035c5",
-  "id": "Login_updateLogin",
+  "gitSyncId": "668ff84389b1a8028a70bcb5_ebd9a56f-4ea3-4d8a-86a2-fa4e32c80697",
+  "id": "Login_SignIn_sql",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\n-- updateLogin\n\nUPDATE `db_users`\nSET `updated_at` = '{{ new Date().toISOString().slice(0, 19).replace(\"T\", \" \") }}'\nWHERE `user_id` = '{{this.params.userId}}';\n\n\n\n# // ------------------------------------------------------------\n\n",
+      "body": "-- SignIn_sql - Login \n\nSELECT * FROM db_users \nWHERE email = '{{inp_email.text}}';\n\n\n-- # // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -28,7 +28,7 @@
       }
     ],
     "executeOnLoad": false,
-    "name": "updateLogin",
+    "name": "SignIn_sql",
     "pageId": "Login",
     "userSetOnLoad": false
   }

@@ -6,6 +6,11 @@
     "pageId": "Products",
     "pluginId": "js-plugin",
     "pluginType": "JS",
-    "variables": []
+    "variables": [
+      {
+        "name": "isTestMode",
+        "value": "true"
+      }
+    ]
   }
 }

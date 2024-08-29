@@ -9,7 +9,7 @@
     "variables": [
       {
         "name": "defaultTab",
-        "value": "'Sign In'"
+        "value": "'SignIn'"
       },
       {
         "name": "testMode",

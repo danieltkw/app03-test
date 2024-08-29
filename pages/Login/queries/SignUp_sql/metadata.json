@@ -1,11 +1,11 @@
 {
   "gitSyncId": "668ff84389b1a8028a70bcb5_3fe1bfb3-d35c-4c71-8e1a-615d96f8097b",
-  "id": "Login_createUser",
+  "id": "Login_SignUp_sql",
   "pluginId": "mysql-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "# // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n# // ------------------------------------------------------------\n# createUser - Login\n\nINSERT INTO `db_users` (`first_name`, `last_name`, `email`, `password_hash`, `role`, `created_at`, `updated_at`)\nVALUES ('{{inp_firstName.text || \"TestFirstName\"}}', '{{inp_lastName.text || \"TestLastName\"}}', '{{inp_registerEmail.text || this.generateRandomEmail()}}', '{{this.generatePasswordHash()}}', 'client', NOW(), NOW());\n\n\n\n# // ------------------------------------------------------------\n",
+      "body": "-- SignUp_sql - Login\n\nINSERT INTO db_users \n(email, password_hash, first_name, last_name, vat_number, created_at, updated_at)\nVALUES \n('{{inp_registerEmail.text}}', '{{hashedPassword}}', '{{inp_firstName.text}}', '{{inp_firstName.text}}', '{{inp_VAT.text}}', NOW(), NOW());\n\n-- # // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com\n\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -28,7 +28,7 @@
       }
     ],
     "executeOnLoad": false,
-    "name": "createUser",
+    "name": "SignUp_sql",
     "pageId": "Login",
     "userSetOnLoad": false
   }

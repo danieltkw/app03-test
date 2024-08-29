@@ -1,12 +1,16 @@
 {
-  "gitSyncId": "668ff84389b1a8028a70bcb5_521240bd-8db7-4d94-b40b-e141035734c0",
+  "gitSyncId": "66b91aa416e9244321599197_9f785ca3-ee7f-432e-830c-2a0402b7721d",
   "id": "Login_functions.generatePasswordHash",
   "pluginId": "js-plugin",
   "pluginType": "JS",
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [],
+      "jsArguments": [
+        {
+          "name": "inp_registerPassword"
+        }
+      ],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },

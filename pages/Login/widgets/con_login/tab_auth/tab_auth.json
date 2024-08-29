@@ -49,7 +49,7 @@
       "rightColumn": 475.5,
       "shouldScrollContents": false,
       "tabId": "tab1",
-      "tabName": "Sign In",
+      "tabName": "Sign_in",
       "topRow": 0,
       "type": "CANVAS_WIDGET",
       "version": 1,
@@ -97,7 +97,7 @@
       "rightColumn": 475.5,
       "shouldScrollContents": false,
       "tabId": "tab2",
-      "tabName": "Sign Up",
+      "tabName": "Sign_up",
       "topRow": 0,
       "type": "CANVAS_WIDGET",
       "version": 1,
@@ -105,7 +105,7 @@
       "widgetName": "Canvas3"
     }
   ],
-  "defaultTab": "{{functions.defaultTab}}",
+  "defaultTab": "{{functions.setDefaultTab('SignUp')}}",
   "displayName": "Tabs",
   "dynamicBindingPathList": [
     {
@@ -130,7 +130,7 @@
   "key": "fjxlfcckvr",
   "leftColumn": 27,
   "maxDynamicHeight": 9000,
-  "minDynamicHeight": 15,
+  "minDynamicHeight": 10,
   "minWidth": 450,
   "mobileBottomRow": 107,
   "mobileLeftColumn": 37,
@@ -151,7 +151,7 @@
       "id": "tab1",
       "index": 0,
       "isVisible": true,
-      "label": "Sign In",
+      "label": "Sign_in",
       "positioning": "vertical",
       "widgetId": "8rq3ao3yqz"
     },
@@ -159,7 +159,7 @@
       "id": "tab2",
       "index": 1,
       "isVisible": true,
-      "label": "Sign Up",
+      "label": "Sign_up",
       "positioning": "vertical",
       "widgetId": "f5yn1hxqze"
     }

@@ -1,0 +1,9 @@
+-- SignUp_sql - Login
+
+INSERT INTO db_users 
+(email, password_hash, first_name, last_name, vat_number, created_at, updated_at)
+VALUES 
+('{{inp_registerEmail.text}}', '{{hashedPassword}}', '{{inp_firstName.text}}', '{{inp_firstName.text}}', '{{inp_VAT.text}}', NOW(), NOW());
+
+-- # // Daniel T. K. W. - github.com/danieltkw - danielkopolo95@gmail.com
+

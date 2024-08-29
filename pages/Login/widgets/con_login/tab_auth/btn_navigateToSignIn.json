@@ -39,7 +39,7 @@
   "mobileLeftColumn": 41,
   "mobileRightColumn": 57,
   "mobileTopRow": 91,
-  "onClick": "{{functions.setDefaultTab('Sign In')}}",
+  "onClick": "{{functions.setDefaultTab('Sign-In')}}/",
   "originalBottomRow": 61,
   "originalTopRow": 57,
   "parentColumnSpace": 19.8125,

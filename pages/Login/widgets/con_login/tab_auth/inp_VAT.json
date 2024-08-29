@@ -71,5 +71,5 @@
   "validation": "{{vatValidation.validateVAT()}}",
   "version": 2,
   "widgetId": "hw2dr8ukop",
-  "widgetName": "inp_lastName"
+  "widgetName": "inp_VAT"
 }

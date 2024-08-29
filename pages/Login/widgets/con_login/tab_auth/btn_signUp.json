@@ -15,6 +15,7 @@
       "key": "borderRadius"
     }
   ],
+  "dynamicPropertyPathList": [],
   "dynamicTriggerPathList": [
     {
       "key": "onClick"
@@ -29,7 +30,7 @@
   "isVisible": true,
   "key": "d80868s2dr",
   "leftColumn": 6,
-  "onClick": "{{functions.register();}}",
+  "onClick": "{{functions.register();",
   "originalBottomRow": 57,
   "originalTopRow": 51,
   "parentColumnSpace": 18.1875,
